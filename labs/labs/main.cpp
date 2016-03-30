@@ -38,7 +38,6 @@ cout <<" родился "<<_date<<"."<<_month<<"."<<Temp<<"г"<<endl;
 	cout << fixed <<_year_double <<" году(выводится тип double)"<< endl;
 	cout << fixed <<_year_float  <<" году(выводится тип float)"<<endl;
 	
-	//_getch(); //Команда задержки экрана с помощью функции _getch()
 	system("pause"); // Команда задержки экрана
 	return 0;
 }
