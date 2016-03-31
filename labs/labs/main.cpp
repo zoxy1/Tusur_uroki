@@ -9,25 +9,27 @@ int main()
 	SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-int a = 2 + (1 / 4); 
-float a_float = 7 * 2 + 1 ^ 3; 
-int a2 = 4 * 3 ^ 3 + 1; 
-int j, b = 5, a3 =4 ; j = b---a3;
-int j1, b1 = 5, a4 =4 ; j1 = (b1--)-a4;
-int j2, b2 = 5, a5 =4 ; j2 = b2-(--a5);
-int j3, b3=5, a6=4; j3 = --b3-a6--;
-int j4, b4=5, a7=4; j4 = --(b4=a7);
+bool a_bool; 
+char a_char;
+short int a_short_int;
+unsigned short int a_unsigned_short_int;
+int a_int;
+unsigned int a_unsigned_int;
+float a_float;
+long float a_long_float;
+double a_double;
+long a_long;
+long long a_long_long;
 
-cout<<"7 - 2 * ( 5 / 2 )="<<(7 - 2 * ( 5 / 2 ))<<endl; 
-cout<<"7 - (2 * 5) / 2 ="<<(7 - (2 * 5) / 2 )<<endl;
-cout<<"7 - 2 * ( (float)5 / 2 ) ="<<(7 - 2 * ( (float)5 / 2 ) )<<endl;	
-cout<<"int a = 2 + (1 / 4); a ="<<a<<endl;
-cout<<"int a2 = 4 * 3 ^ 3 + 1; a2 ="<<a2<<endl;
-cout<<"int j, b = 5, a3 =4 ; j = b---a3; j="<<j<<endl;
-cout<<"int j1, b1 = 5, a4 =4 ; j1 = (b1--)-a4; j1="<<j1<<endl;
-cout<<"int j2, b2 = 5, a5 =4 ; j2 = b2-(--a5); j2="<<j2<<endl;
-cout<<"int j3, b3=5, a6=4; j3 = --b3-a6--; j3="<<j3<<endl;
-cout<<"int j4, b4=5, a7=4; j4 = --(b4=a7); j4="<<j4<<endl;
+cout<<"Количество байт которое занимает тип данных:\nbool="<<sizeof(a_bool)<<endl;
+cout<<"char="<<sizeof(a_char)<<endl;
+cout<<"short int="<<sizeof(a_short_int)<<endl;
+cout<<"unsigned short int="<<sizeof(a_unsigned_short_int)<<endl;
+cout<<"int="<<sizeof(a_int)<<endl;
+cout<<"unsigned int="<<sizeof(a_unsigned_int)<<endl;
+cout<<"float="<<sizeof(a_float)<<endl;
+cout<<"long float="<<sizeof(a_long_float)<<endl;
+cout<<"double="<<sizeof(a_double)<<endl;
 system("pause"); // Команда задержки экрана
 	return 0;
 }
