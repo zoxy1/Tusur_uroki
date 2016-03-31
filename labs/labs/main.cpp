@@ -1,4 +1,4 @@
-// lab2_2
+// lab2_3
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 using namespace std;
@@ -18,8 +18,6 @@ unsigned int a_unsigned_int;
 float a_float;
 long float a_long_float;
 double a_double;
-long a_long;
-long long a_long_long;
 
 cout<<"Количество байт которое занимает тип данных:\nbool="<<sizeof(a_bool)<<endl;
 cout<<"char="<<sizeof(a_char)<<endl;
@@ -30,6 +28,7 @@ cout<<"unsigned int="<<sizeof(a_unsigned_int)<<endl;
 cout<<"float="<<sizeof(a_float)<<endl;
 cout<<"long float="<<sizeof(a_long_float)<<endl;
 cout<<"double="<<sizeof(a_double)<<endl;
+
 system("pause"); // Команда задержки экрана
 	return 0;
 }
