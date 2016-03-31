@@ -28,6 +28,9 @@ cout<<"unsigned int="<<sizeof(a_unsigned_int)<<endl;
 cout<<"float="<<sizeof(a_float)<<endl;
 cout<<"long float="<<sizeof(a_long_float)<<endl;
 cout<<"double="<<sizeof(a_double)<<endl;
+cout<<"(int)char="<<sizeof((int)a_char)<<endl;
+cout<<"(float)char="<<sizeof((float)a_char)<<endl;
+cout<<"(double)char="<<sizeof((double)a_char)<<endl;
 
 system("pause"); // Команда задержки экрана
 	return 0;
