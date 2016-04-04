@@ -15,9 +15,11 @@ int main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 	struct_student student1;
-	student1.Name={'A'};
+	student1.rost=182;
+	student1.years=30;
 	
-	//cout << fixed <<_year_float  <<" году(выводится тип float)"<<endl;
+	cout << student1.rost <<endl;
+	cout << student1.years <<endl;
 	system("pause"); // Команда задержки экрана
 	return 0;
 }
