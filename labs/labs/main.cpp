@@ -9,34 +9,32 @@ int main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-
+	
+// float *ptrarray = new float [10]; // создан
+	//*ptrvalue = 9; // инициализация объекта через указатель
+ //int *ptrvalue = new int (9); инициализация может выполнятся сразу при объявлении динамического объекта
 	char Second_name[20];
 	char First_name[20];
 	char Patronymic_name[20]; 
-	int _month, Temp,_date;
+	int elem_mass;
 	double _year_double;
 	float _year_float;
-	cout<<"Введите фамилию имя отчество (через пробел): ";
-	cin >> Second_name;
-	cin >> First_name;
-	cin >> Patronymic_name;
-	system("cls");
-	cout<<"Введите дату рождения: ";
-	cin >> _date;
-	system("cls");
-	cout<<"Введите месяц рождения(от 1 до 12): ";
-	cin >> _month;
-	system("cls");
-	cout<<"Введите год рождения: ";
-	cin >> Temp;
-	_year_float=Temp+40;
-	_year_double=Temp+40;
-	system("cls");
-	cout << "Студент:" << Second_name<<" "<<First_name<<" "<<Patronymic_name;
-	cout <<" родился "<<_date<<"."<<_month<<"."<<Temp<<"г"<<endl;
-	cout << "\nему исполнится 40 лет в:" <<endl;
-	cout << fixed <<_year_double <<" году(выводится тип double)"<< endl;
-	cout << fixed <<_year_float  <<" году(выводится тип float)"<<endl;
+	cout<<"Введите количество элементов массива:";
+	cin >> elem_mass;
+	int *mass = new int[elem_mass]; // динамическое выделение памяти под объект типа int
+	for(int i=0;i<elem_mass;i++)
+	{
+		mass[i]=i;
+	}
+
+	//int mass[elem_mass];
+	for(int i=0;i<elem_mass;i++)
+	{
+	cout <<i<<"- элемент:" <<mass[i]<<endl;
+	
+	}
+
+	
 	system("pause"); // Команда задержки экрана
 	return 0;
 }
