@@ -65,7 +65,7 @@ int main()
 	}
 	
 	system("pause"); // Команда задержки экрана
-	system("Cls");
+	system("Cls"); // очищаем экран
 	cout<<"\nВведите первую строку матрицы размером 3х3 (цифры через пробел):";
 	cin>>matrix[0][0];
 	cin>>matrix[1][0];
@@ -130,8 +130,11 @@ int main()
 		}
 	cout<<endl;
 	}		
-	//free(mass); //осво бождаем память выделенную под динамический массив 
+	
 	delete []mass;
+	delete []mass_minus;
+	delete []mass_plus;
+	delete []mass_umnogit;
 	system("pause"); // Команда задержки экрана
 	return 0;
 }
