@@ -13,7 +13,7 @@ int main()
 	srand( time( 0 ) ); //используетс€ дл€ того чтобы при новом запуске программы генерировались разные числа в функции rand()
 	
 	int elem_mass=0,interval_mass=0,summa=0,summa_max=0, index_interval_max=0;
-	cout<<"¬ведите кол545ичество элементов массива от 1 до 100:";
+	cout<<"¬ведите количество элементов массива от 1 до 100:";
 	cin >> elem_mass; 
 	cout<<"¬ведите интервал от 0 до "<<elem_mass<<":";
 	cin >> interval_mass;
