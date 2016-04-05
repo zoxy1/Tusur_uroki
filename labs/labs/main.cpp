@@ -11,127 +11,28 @@ int main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 	//srand( (unsigned int)time( 0 ) ); //используется для того чтобы при новом запуске программы генерировались разные числа в функции rand()
+	srand( time( 0 ) ); //используется для того чтобы при новом запуске программы генерировались разные числа в функции rand()
 	
-	int elem_mass=0;
-	int chislo=0;
-	int matrix[3][3];
-	int matrix_plus[3][3];
-	int matrix_minus[3][3];
-	int matrix_umnogit[3][3];
-
-	//int min_value=32767; //максимальное число которое генерит функция rand() 
-	cout<<"Введите количество элементов массива от 1 до 10:";
-	cin >> elem_mass; 
+	int elem_mass1=0,elem_mass2=0;
+	cout<<"Введите количество элементов 1-го массива от 1 до 10:";
+	cin >> elem_mass1; 
+	int *mass1 = new int[elem_mass1]; // динамическое выделение памяти под массив типа int размером в elem_mass1 
+	cout<<"Введите количество элементов 2-го массива от 1 до 10:";
+	cin >> elem_mass2; 
+	int *mass2 = new int[elem_mass2]; // динамическое выделение памяти под массив типа int размером в elem_mass2 
 	
-	int *mass = new int[elem_mass]; // динамическое выделение памяти под массив типа int размером в elem_mass 
-	int *mass_plus = new int[elem_mass]; // динамическое выделение памяти под массив типа int размером в elem_mass 
-	int *mass_minus = new int[elem_mass]; // динамическое выделение памяти под массив типа int размером в elem_mass 
-	int *mass_umnogit = new int[elem_mass]; // динамическое выделение памяти под массив типа int размером в elem_mass 
-	
-	for(int i=0;i<elem_mass;i++) 
+	for(int i=0;i<elem_mass;i++) //заполняем массив случайными числами от 0 до 10
 	{
-		cout<<"\nВведите "<<i<<" - елемент массива:";
-		cin>>mass[i];
+		mass[i]=rand()%10;
 	}
 	for(int i=0;i<elem_mass;i++) // Выводим заполненный массив чисел
 	{
 		cout <<i<<"- элемент:" <<mass[i]<<endl;
 	}
-	cout<<"\nВведите число для сложения, вычитания, умножения массива:";
-	cin>>chislo;
-
-	for(int i=0;i<elem_mass;i++) //заполняем массив случайными числами от 0 до 10
-	{
-		
-		mass_plus[i]=mass[i]+chislo;
-		mass_minus[i]=mass[i]-chislo;
-		mass_umnogit[i]=mass[i]*chislo;
 	
-	}
-	cout<<"\nВыводим массив при сложении с числом "<<chislo<<endl;
-	for(int i=0;i<elem_mass;i++) // Выводим заполненный массив чисел
-	{
-		cout <<i<<"- элемент:" <<mass_plus[i]<<endl;
-	}
-	cout<<"\nВыводим массив при вычитании числа "<<chislo<<endl;
-	for(int i=0;i<elem_mass;i++) // Выводим заполненный массив чисел
-	{
-		cout <<i<<"- элемент:" <<mass_minus[i]<<endl;
-	}
-	cout<<"\nВыводим массив при умножении на число "<<chislo<<endl;
-	for(int i=0;i<elem_mass;i++) // Выводим заполненный массив чисел
-	{
-		cout <<i<<"- элемент:" <<mass_umnogit[i]<<endl;
-	}
-	
-	system("pause"); // Команда задержки экрана
-	system("Cls");
-	cout<<"\nВведите первую строку матрицы размером 3х3 (цифры через пробел):";
-	cin>>matrix[0][0];
-	cin>>matrix[1][0];
-	cin>>matrix[2][0];
-	cout<<"\nВведите вторую строку матрицы размером 3х3 (цифры через пробел):";
-	cin>>matrix[0][1];
-	cin>>matrix[1][1];
-	cin>>matrix[2][1];
-	cout<<"\nВведите третью строку матрицы размером 3х3 (цифры через пробел):";
-	cin>>matrix[0][2];
-	cin>>matrix[1][2];
-	cin>>matrix[2][2];
-
-	cout<<"\nВведенная матрица:\n";
-	for(int j=0;j<3;j++)
-	{
-		for(int i=0;i<3;i++)
-		{
-			cout<<matrix[i][j]<<" ";
-		}
-	cout<<endl;
-	}
-	cout<<"\nВведите число для сложения, вычитания, умножения матрицы:";
-	cin>>chislo;
-	
-	for(int j=0;j<3;j++)
-	{
-		for(int i=0;i<3;i++)
-		{
-			matrix_plus[i][j]=matrix[i][j]+chislo;
-			matrix_minus[i][j]=matrix[i][j]-chislo;
-			matrix_umnogit[i][j]=matrix[i][j]*chislo;
-		}
-	}
-	cout<<"\nВыводим матрицу при сложении числа "<<chislo<<endl;
-		
-	for(int j=0;j<3;j++)
-	{
-		for(int i=0;i<3;i++)
-		{
-			cout<<matrix_plus[i][j]<<" ";
-		}
-	cout<<endl;
-	}
-	cout<<"\nВыводим матрицу при вычитании числа "<<chislo<<endl;
-		
-	for(int j=0;j<3;j++)
-	{
-		for(int i=0;i<3;i++)
-		{
-			cout<<matrix_minus[i][j]<<" ";
-		}
-	cout<<endl;
-	}
-	cout<<"\nВыводим матрицу при умножении числа "<<chislo<<endl;
-		
-	for(int j=0;j<3;j++)
-	{
-		for(int i=0;i<3;i++)
-		{
-			cout<<matrix_umnogit[i][j]<<" ";
-		}
-	cout<<endl;
-	}		
 	//free(mass); //осво бождаем память выделенную под динамический массив 
-	delete []mass;
+	delete []mass1;
+	delete []mass2;
 	system("pause"); // Команда задержки экрана
 	return 0;
 }
