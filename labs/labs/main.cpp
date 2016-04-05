@@ -10,8 +10,6 @@ int main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	//srand( (unsigned int)time( 0 ) ); //используется для того чтобы при новом запуске программы генерировались разные числа в функции rand()
-	
 	int elem_mass=0;
 	int chislo=0;
 	int matrix[3][3];
@@ -19,7 +17,6 @@ int main()
 	int matrix_minus[3][3];
 	int matrix_umnogit[3][3];
 
-	//int min_value=32767; //максимальное число которое генерит функция rand() 
 	cout<<"Введите количество элементов массива от 1 до 10:";
 	cin >> elem_mass; 
 	
@@ -42,11 +39,9 @@ int main()
 
 	for(int i=0;i<elem_mass;i++) //заполняем массив случайными числами от 0 до 10
 	{
-		
 		mass_plus[i]=mass[i]+chislo;
 		mass_minus[i]=mass[i]-chislo;
 		mass_umnogit[i]=mass[i]*chislo;
-	
 	}
 	cout<<"\nВыводим массив при сложении с числом "<<chislo<<endl;
 	for(int i=0;i<elem_mass;i++) // Выводим заполненный массив чисел
