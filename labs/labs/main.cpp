@@ -126,10 +126,10 @@ int main()
 	cout<<endl;
 	}		
 	
-	delete []mass;
-	delete []mass_minus;
-	delete []mass_plus;
-	delete []mass_umnogit;
+	delete []mass; // освобождаем память выделенную под массив mass
+	delete []mass_minus; // освобождаем память выделенную под массив mass_minus
+	delete []mass_plus; // освобождаем память выделенную под массив mass_plus
+	delete []mass_umnogit; // освобождаем память выделенную под массив mass_umnogit
 	system("pause"); // Команда задержки экрана
 	return 0;
 }
