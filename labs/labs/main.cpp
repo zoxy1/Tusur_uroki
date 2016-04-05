@@ -11,52 +11,44 @@ int main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 	srand( time( 0 ) );
-// float *ptrarray = new float [10]; // создан
-	//*ptrvalue = 9; // инициализация объекта через указатель
- //int *ptrvalue = new int (9); инициализация может выполнятся сразу при объявлении динамического объекта
-	char Second_name[20];
-	char First_name[20];
-	char Patronymic_name[20]; 
-	int elem_mass,interval_mass,summa=0,summa_max=0, index_interval_max=0;
-	double _year_double;
-	float _year_float;
-	cout<<"Введите количество элементов массива от 1 до 100:";
-	cin >> elem_mass;
-	cout<<"Введите интервал от 0 до "<<elem_mass<<":"<<endl;
-	cin >> interval_mass;
-	int *mass = new int[elem_mass]; // динамическое выделение памяти под массив типа int
 	
-	for(int i=0;i<elem_mass;i++)
+	int elem_mass=0,interval_mass=0,summa=0,summa_max=0, index_interval_max=0;
+	cout<<"Введите кол545ичество элементов массива от 1 до 100:";
+	cin >> elem_mass; 
+	cout<<"Введите интервал от 0 до "<<elem_mass<<":";
+	cin >> interval_mass;
+	int *mass = new int[elem_mass]; // динамическое выделение памяти под массив типа int размером в elem_mass 
+	
+	for(int i=0;i<elem_mass;i++) //заполняем массив случайными числами от 0 до 10
 	{
 		mass[i]=rand()%10;
 	}
-	for(int i=0;i<elem_mass;i++)
+	for(int i=0;i<elem_mass;i++) // Выводим заполненный массив чисел
 	{
 		cout <<i<<"- элемент:" <<mass[i]<<endl;
 	}
-	/*while (max_interval!=elem_mass)
-	{
 	
-	}*/
-	for(int j=0;j<=(elem_mass-interval_mass);j++)
+	for(int j=0;j<=(elem_mass-interval_mass);j++) // находим максимальную сумму в заданном интервале
 	{
 		summa=0;
 		for(int i=0;i<interval_mass;i++)
 		{
 			summa=summa+mass[i+j];
 		}
-		if(summa_max<summa)
+		if(summa_max<summa) 
 		{
 			summa_max=summa;
-			index_interval_max=j;
+			index_interval_max=j; // с этого индекса начинается интервал с максимальной суммой
 		}
 	}
 	
-	cout <<"Интервал с максимальной суммой равной: " <<summa_max<<endl;
-	for(int i=index_interval_max;i<(elem_mass-index_interval_max);i++)
+	cout <<"Интервал с максимальной суммой равной: " <<summa_max<<endl; // Выводим максимальную сумму
+	for(int i=index_interval_max;i<(index_interval_max+interval_mass);i++) // выводим интервал с максимальной суммой
 	{
 		cout <<i<<"- элемент:" <<mass[i]<<endl;
 	}
+	//free(mass); //осво бождаем память выделенную под динамический массив 
+	delete []mass;
 	system("pause"); // Команда задержки экрана
 	return 0;
 }
