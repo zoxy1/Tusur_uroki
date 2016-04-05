@@ -1,4 +1,4 @@
-// lab2_1
+// lab3_1
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <ctime> // библиотека необходимая для использования функции time()
@@ -10,7 +10,7 @@ int main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	srand( time( 0 ) );
+	srand( time( 0 ) ); //используется для того чтобы при новом запуске программы генерировались разные числа в функции rand()
 	
 	int elem_mass=0,interval_mass=0,summa=0,summa_max=0, index_interval_max=0;
 	cout<<"Введите кол545ичество элементов массива от 1 до 100:";
