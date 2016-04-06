@@ -75,9 +75,15 @@ int main()
 	Vivod(elem_mass2, mass2_minus);
 	cout<<"\nВторой массив при умножении на число:\n";
 	Vivod(elem_mass2, mass2_umnogit);
-	delete []mass1; // высвобождаем памать выделенную под массив mass1
-	delete []mass2; // высвобождаем памать выделенную под массив mass2
-	system("pause"); // Команда задержки экрана
+	delete []mass1; // высвобождаем памать выделенную под массивы
+	delete []mass2; 
+	delete []mass1_plus; 
+	delete []mass1_minus;
+	delete []mass1_umnogit; 
+	delete []mass2_plus; 
+	delete []mass2_minus;
+	delete []mass2_umnogit; 
+	system("pause"); //  Команда задержки экрана
 	return 0;
 }
 
