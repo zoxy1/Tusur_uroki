@@ -1,4 +1,4 @@
-// lab3_3
+// lab4_2
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <ctime> // библиотека необходимая для использования функции time()
