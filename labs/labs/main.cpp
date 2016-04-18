@@ -1,7 +1,7 @@
 // lab4_1
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include<math.h> // содержит функцию sin(x);
+#include<ctime.h> 
 using namespace std;
 
 int main()
@@ -10,41 +10,45 @@ int main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	double d_left=0, d_right=0,shag=0, sinx_f=0,sinx_d=0;
+	srand( time( 0 ) ); //используется для того чтобы при новом запуске программы генерировались разные числа в функции rand()
 	
-	cout<<"Введите через пробел диапазон изменения аргумента синуса:";
-	cin>>d_left; //вводим левую границу диапазона аргумента х 
-	cin>>d_right; //вводим правую границу диапазона аргумента х 
-	cout<<"Введите шаг изменения аргумента х в sin(х):";
-	cin>>shag; //вводим шаг аргумента х 
+	int elem_mass=0,interval_mass=0,summa=0,summa_max=0, index_interval_max=0;
+	cout<<"Введите количество элементов массива от 1 до 100:";
+	cin >> elem_mass; 
+	cout<<"Введите интервал от 0 до "<<elem_mass<<":";
+	cin >> interval_mass;
+	int *mass = new int[elem_mass]; // динамическое выделение памяти под массив типа int размером в elem_mass 
 	
-	cout.precision(10); // устанавливаем на вывод точность десять десятичных знаков
-	for(d_left;d_left<=d_right;d_left+=shag)
+	for(int i=0;i<elem_mass;i++) //заполняем массив случайными числами от 0 до 10
+	{
+		mass[i]=rand()%10;
+	}
+	for(int i=0;i<elem_mass;i++) // Выводим заполненный массив чисел
+	{
+		cout <<i<<"- элемент:" <<mass[i]<<endl;
+	}
+	
+	for(int j=0;j<=(elem_mass-interval_mass);j++) // находим максимальную сумму в заданном интервале
+	{
+		summa=0;
+		for(int i=0;i<interval_mass;i++)
 		{
-			sinx_d=sin(d_left); //находим значение синуса для аргумента типа double
-			sinx_f=sin((float)d_left); //находим значение синуса для аргумента типа float
-			cout<<endl<<endl<<"При х="<<d_left<<endl; // выводим значение аргумента
-			cout<<"double:"<<sinx_d<<endl;	// выводим значение синуса для аргумента типа double
-			cout<<"float: "<<sinx_f; // выводим значение синуса для аргумента типа float
-			if((sinx_d!=0)||(sinx_f!=0)) 
-			{
-				// сравниваем значение синуса для аргумента типа double и float
-				if(sinx_d>sinx_f) 
-				{
-					cout<<endl<<"Значение sin((double)х)>sin((float) x)"<<endl;
-				}
-				else
-				{
-					cout<<endl<<"Значение sin((double)х)<sin((float) x)"<<endl;
-				}
-			}
-			if(sin(d_left)==sin((float)d_left))
-				{
-					cout<<endl<<"Значение sin((double)х)==sin((float) x)"<<endl;
-				}
-		
-	
+			summa=summa+mass[i+j];
 		}
+		if(summa_max<summa) 
+		{
+			summa_max=summa;
+			index_interval_max=j; // с этого индекса начинается интервал с максимальной суммой
+		}
+	}
+	
+	cout <<"Интервал с максимальной суммой равной: " <<summa_max<<endl; // Выводим максимальную сумму
+	for(int i=index_interval_max;i<(index_interval_max+interval_mass);i++) // выводим интервал с максимальной суммой
+	{
+		cout <<i<<"- элемент:" <<mass[i]<<endl;
+	}
+	
+	delete []mass;
 	system("pause"); //  Команда задержки экрана
 	return 0;
 }
