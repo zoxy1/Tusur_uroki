@@ -1,72 +1,61 @@
-// lab5_2
+// lab5_3
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <ctime> // библиотека необходимая для использования функции time()
+#include <cstdio>
 using namespace std;
 
-void fuction_srav(int * mass1, int elem_mass1, int * mass2, int elem_mass2); //прототип функции
+
 
 int main()
 {
-	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
-    SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
+	//SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
+    //SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	srand( time( 0 ) ); //используется для того чтобы при новом запуске программы генерировались разные числа в функции rand()
-	
-	int elem_mass1=0,elem_mass2=0;
-	
-	cout<<"Введите количество элементов первого массива:";
-	cin >> elem_mass1; 
-	cout<<"Введите количество элементов первого массива:";
-	cin >> elem_mass2; 
-	
-	int *mass1 = new int[elem_mass1]; // динамическое выделение памяти под массив типа int размером в elem_mass1 
-	int *mass2 = new int[elem_mass2]; // динамическое выделение памяти под массив типа int размером в elem_mass1 
-
-	for(int i=0;i<elem_mass1;i++) //заполняем массив случайными числами от 0 до 10
-	{
-		mass1[i]=rand();
-	}
-	for(int i=0;i<elem_mass2;i++) //заполняем массив случайными числами от 0 до 10
-	{
-		mass2[i]=rand();
-	}
-	
-	cout<<endl<<"Выводим первый массив"<<endl;
-	for(int i=0;i<elem_mass1;i++) // Выводим заполненный первый массив чисел
-	{
-		cout <<i<<"- элемент:" <<mass1[i]<<endl;
-	}
-	cout<<endl<<"Выводим второй массив"<<endl;
-	for(int i=0;i<elem_mass2;i++) // Выводим заполненный первый массив чисел
-	{
-		cout <<i<<"- элемент:" <<mass2[i]<<endl;
-	}
-	
-	// функция подсчитывает сумму элементов в двух массивах и выводит какая из них больше 
-	fuction_srav(mass1, elem_mass1, mass2, elem_mass2); 
-	
-	delete []mass1;
-	delete []mass2;
+	 
+	int count1=0,str_count=0;
+	setlocale(LC_ALL,".1251");                //Делаем допустимым вывод кириллицы в консоль.
+     FILE *in = fopen("Text.txt","r"); //файл находится в папке main (папка main находится в папке с проектом)
+      cout<<"Открываем файл \"Text.txt\" ";                                                  //  параметр "r", то есть reed - позволит нам только считать информацию.
+     if(in==NULL)                                   //если in(файл) равен NULL,значит он не может открыться.Либо путь не тот.
+     {
+         cout<<"Ошибка в открытии файла Text.txt"<<endl;
+     }
+     else
+     {
+        char str[12];       //создаём строку(string) .
+        fgets(str,12,in);   //записываем в str первую строку.
+        str_count++;
+		for(int i=0;i<10;i++)
+		{
+			if(str[i]=='0'||str[i]=='1'||str[i]=='2'||str[i]=='3'||str[i]=='4'||str[i]=='5'||str[i]=='6'||str[i]=='7'||str[i]=='8'||str[i]=='9')
+			{
+			count1++;
+			}
+		}
+		cout<<endl<<"Строка "<<str_count<<" : "<<str<<endl; 
+		cout<<"Количество цифр в строке:"<<count1<<endl;  
+		 while(!feof(in))    //пока не конец файла in ,мы исполняем цикл.
+         {
+        
+			fgets(str,12,in); 
+			str_count++;
+			cout<<endl<<"Строка"<<str_count<<" : "<<str; 
+			count1=0;
+			for(int i=0;i<10;i++)
+			{
+				if(str[i]=='0'||str[i]=='1'||str[i]=='2'||str[i]=='3'||str[i]=='4'||str[i]=='5'||str[i]=='6'||str[i]=='7'||str[i]=='8'||str[i]=='9')
+				{
+				count1++;
+				}
+			}
+			
+			cout<<endl<<"Количество цифр в строке:"<<count1<<endl;  
+		}
+         
+		 fcloseall();         //закрываем все открытые (в нашем случае один) файлы.
 	system("pause"); // Команда задержки экрана
 	return 0;
-}
-
-void fuction_srav(int * mass1, int elem_mass1, int * mass2, int elem_mass2)
-{
-long int summa1=0,summa2=0;
-	for(int i=0;i<elem_mass1;i++)
-	{
-	summa1+=mass1[i];
 	}
-	for(int i=0;i<elem_mass2;i++)
-	{
-	summa2+=mass2[i];
-	}
-	if (summa1>summa2) 
-		cout<<"Сумма элементов в первом массиве > чем во втором."<<endl;
-	else 
-		cout<<"Сумма элементов в первом массиве < чем во втором."<<endl;
-
 }
