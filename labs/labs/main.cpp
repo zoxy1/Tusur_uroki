@@ -4,23 +4,7 @@
 #include <ctime> // библиотека необходимая для использования функции time()
 using namespace std;
 
-void fuction_srav(int * mass1, int elem_mass1, int * mass2, int elem_mass2)
-{
-long int summa1=0,summa2=0;
-	for(int i=0;i<elem_mass1;i++)
-	{
-	summa1+=mass1[i];
-	}
-	for(int i=0;i<elem_mass2;i++)
-	{
-	summa2+=mass2[i];
-	}
-	if (summa1>summa2) 
-		cout<<"Сумма элементов в первом массиве > чем во втором."<<endl;
-	else 
-		cout<<"Сумма элементов в первом массиве < чем во втором."<<endl;
-
-}
+void fuction_srav(int * mass1, int elem_mass1, int * mass2, int elem_mass2); //прототип функции
 
 int main()
 {
@@ -69,3 +53,20 @@ int main()
 	return 0;
 }
 
+void fuction_srav(int * mass1, int elem_mass1, int * mass2, int elem_mass2)
+{
+long int summa1=0,summa2=0;
+	for(int i=0;i<elem_mass1;i++)
+	{
+	summa1+=mass1[i];
+	}
+	for(int i=0;i<elem_mass2;i++)
+	{
+	summa2+=mass2[i];
+	}
+	if (summa1>summa2) 
+		cout<<"Сумма элементов в первом массиве > чем во втором."<<endl;
+	else 
+		cout<<"Сумма элементов в первом массиве < чем во втором."<<endl;
+
+}
