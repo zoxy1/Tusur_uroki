@@ -3,6 +3,7 @@
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <ctime> // библиотека необходимая для использования функции time()
 #include <cstdio>
+#include <cctype>
 using namespace std;
 
 
@@ -34,8 +35,9 @@ int main()
 			{
 				if(str[i]=='\0') // если встретили символ конца строки выходим из цикла for 
 					break;
-				if(str[i]=='0'||str[i]=='1'||str[i]=='2'||str[i]=='3'||str[i]=='4'||str[i]=='5'||str[i]=='6'||str[i]=='7'||str[i]=='8'||str[i]=='9')
-				//проверяем считываемый символ цыфра или нет
+				// можно так if(str[i]=='0'||str[i]=='1'||str[i]=='2'||str[i]=='3'||str[i]=='4'||str[i]=='5'||str[i]=='6'||str[i]=='7'||str[i]=='8'||str[i]=='9')
+				if(isdigit(str[i]))
+					//проверяем считываемый символ цифра или нет
 				{
 					count1++; // считаем количество цифр в строке
 					if(cifra_on==0) //если предыдущий символ не цифра
