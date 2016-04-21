@@ -32,8 +32,8 @@ int main()
 		{
 			if(str[i]=='0'||str[i]=='1'||str[i]=='2'||str[i]=='3'||str[i]=='4'||str[i]=='5'||str[i]=='6'||str[i]=='7'||str[i]=='8'||str[i]=='9')
 			{
-				
-				if((chislo==1)&&(posishin<(i+1)))
+			count1++;	
+		/*		if((chislo==1)&&(posishin<(i+1)))
 				{
 				count1++;
 				}
@@ -43,8 +43,8 @@ int main()
 			else
 			{
 			chislo=0;
+			}*/
 			}
-		
 		}
 		cout<<endl<<"Строка "<<str_count<<" : "<<str<<endl; 
 		cout<<"Количество цифр в строке:"<<count1<<endl;  
