@@ -3,21 +3,24 @@
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <string>
 using namespace std;
-
+void vivod_my (int years); // используем перегрузку функции vivod_my 
+void vivod_my(float paycheck_in); //компилятор сам выбирает функцию в зависимости от типа принимаемого параметра
 struct sotrudnik
 {
 string name;
 int years;
 float paycheck;
 };
+sotrudnik sotr[10]; // объявляем 10 структур
+
 int main()
 {
 	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-int years_in=2010,paycheck_in=90000;
-sotrudnik sotr[10]; // объявляем 10 структур
+int years_in=2010;
+float paycheck_in=90000;
 sotr[0].name="Попов Иван Николаевич"; // заполняем структуры данными
 sotr[0].years=1940;
 sotr[0].paycheck=15000;
@@ -48,9 +51,21 @@ sotr[8].paycheck=70000;
 sotr[9].name="Иванов Анатолий Дмитриевич";
 sotr[9].years=2000;
 sotr[9].paycheck=55000;
+
 cout<<"Введите год рождения:";
 cin>>years_in;
 cout<<endl<<"Список сотрудников родившихся раньше "<<years_in<<"года:"<<endl;
+vivod_my (years_in);
+cout<<endl<<"Введите сумму оклада:";
+cin>>paycheck_in;
+cout<<endl<<"Список сотрудников получающих больше "<<paycheck_in<<"рублей:"<<endl;
+vivod_my(paycheck_in);
+system("pause");
+}
+
+void vivod_my(int years_in)
+{
+
 for(int i=0;i<10;i++)
 	{
 	if(sotr[i].years<years_in) // проверяем и выводим всех кто родился раньше заданного года
@@ -58,18 +73,15 @@ for(int i=0;i<10;i++)
 		cout<<(sotr[i].name)<<endl; 
 	}
 	}
-cout<<endl<<"Введите сумму оклада:";
-cin>>paycheck_in;
-cout<<endl<<"Список сотрудников получающих больше "<<paycheck_in<<"рублей:"<<endl;
+}
+void vivod_my(float paycheck_in)
+{
 for(int i=0;i<10;i++)
 	{
-	if(sotr[i].paycheck>paycheck_in) // проверяем и выводим всех кто получает больше заданной суммы оклада
-	{
-		cout<<(sotr[i].name)<<endl; 
-	{
+		if(sotr[i].paycheck>paycheck_in) // проверяем и выводим всех кто получает больше заданной суммы оклада
+		{
+			cout<<(sotr[i].name)<<endl; 
+		}
 	}
-	}
-
-system("pause");
 
 }
