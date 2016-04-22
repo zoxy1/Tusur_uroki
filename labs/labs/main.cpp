@@ -5,15 +5,15 @@
 using namespace std;
 void vivod_my (int years); // используем перегрузку функции vivod_my 
 void vivod_my(float paycheck_in); //компил€тор сам выбирает функцию в зависимости от типа принимаемого параметра
-struct sotrudnik
-{
-string name;
-int years;
-float paycheck;
-};
+struct sotrudnik //описываем структуру котора€ содержит им€ год рождени€ и зарплату сотрудника
+	{
+		string name;
+		int years;
+		float paycheck;
+	};
 sotrudnik sotr[10]; // объ€вл€ем 10 структур
 
-int main()
+void main()
 {
 	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
@@ -55,12 +55,13 @@ sotr[9].paycheck=55000;
 cout<<"¬ведите год рождени€:";
 cin>>years_in;
 cout<<endl<<"—писок сотрудников родившихс€ раньше "<<years_in<<"года:"<<endl;
-vivod_my (years_in);
+vivod_my (years_in); 
 cout<<endl<<"¬ведите сумму оклада:";
 cin>>paycheck_in;
 cout<<endl<<"—писок сотрудников получающих больше "<<paycheck_in<<"рублей:"<<endl;
 vivod_my(paycheck_in);
 system("pause");
+
 }
 
 void vivod_my(int years_in)
@@ -83,5 +84,4 @@ for(int i=0;i<10;i++)
 			cout<<(sotr[i].name)<<endl; 
 		}
 	}
-
 }
