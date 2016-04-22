@@ -6,7 +6,7 @@ using namespace std;
 
 void fuction_srav(int * mass1, int elem_mass1, int * mass2, int elem_mass2); //прототип функции
 
-int main()
+void main()
 {
 	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
@@ -50,7 +50,6 @@ int main()
 	delete []mass1;
 	delete []mass2;
 	system("pause"); // Команда задержки экрана
-	return 0;
 }
 
 void fuction_srav(int * mass1, int elem_mass1, int * mass2, int elem_mass2)
