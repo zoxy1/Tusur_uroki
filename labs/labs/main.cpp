@@ -35,9 +35,6 @@ switch(day_week)
 		break;
 	default: cout<<"Ошибка при вводе дня недели"<<endl;
 	}
-
 system("pause");
-
-
 }
 
