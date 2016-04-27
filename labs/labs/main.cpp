@@ -5,11 +5,7 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include <string>
 using namespace std;
-void vivod_my (int years); // используем перегрузку функции vivod_my 
-void vivod_my(float paycheck_in); //компилятор сам выбирает функцию в зависимости от типа принимаемого параметра
-
 
 void main()
 {
