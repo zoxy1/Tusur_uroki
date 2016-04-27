@@ -30,7 +30,7 @@ else if(length>=1.5)
 	{
 	cout<<"Оценка школьника: 3 балла"<<endl;
 	}
-else if(length<1.5)
+else 
 	{
 	cout<<"Оценка школьника: 2 балла"<<endl;
 	}
