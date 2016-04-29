@@ -16,50 +16,56 @@ void main()
  
 	cout<<"Введите номер дня в 2016 году:";
 	int number=0,day=0;
-	//char month[]={0,31,29,31,30,31,30,31,31,30,31,30,31};
-	int month[]={0,31,60,91,121,152,182,244,275,305,336,366,397};
+	//char month[]={0,31,29,31,30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int month[]=   {0,31,60,91,121,152,182,213,244,274,305,335,366};
 	cin>>number;
-	day=number;
-	for(int i=1;i<=12;i++)
+	if(number>366)
 	{
-		if((number<=month[i])&&(number>month[i-1]))
+		cout<<"Вы ввели не правилое количество дней"<<endl;
+	}
+	else
+	{
+		day=number;
+		for(int i=1;i<=12;i++)
 		{
-			number-=month[i-1];
-			cout<<number<<" ";
-			switch(i)
+			if((number<=month[i])&&(number>month[i-1]))
 			{
-			case 1:cout<<"января ";
-			break;
-			case 2:cout<<"февраля ";
-			break;
-			case 3:cout<<"марта ";
-			break;
-			case 4:cout<<"апреля ";
-			break;
-			case 5:cout<<"мая" ;
-			break;
-			case 6:cout<<"июня ";
-			break;
-			case 7:cout<<"июля" ;
-			break;
-			case 8:cout<<"августа ";
-			break;
-			case 9:cout<<"сентября ";
-			break;
-			case 10:cout<<"октября"<<endl;
-			break;
-			case 11:cout<<"ноября"<<endl;
-			break;
-			case 12:cout<<"декабря"<<endl;
-			break;
-			default: ;
+				number-=month[i-1];
+				cout<<number<<" ";
+				switch(i)
+				{
+					case 1:cout<<"января ";
+					break;
+					case 2:cout<<"февраля ";
+					break;
+					case 3:cout<<"марта ";
+					break;
+					case 4:cout<<"апреля ";
+					break;
+					case 5:cout<<"мая" ;
+					break;
+					case 6:cout<<"июня ";
+					break;
+					case 7:cout<<"июля" ;
+					break;
+					case 8:cout<<"августа ";
+					break;
+					case 9:cout<<"сентября ";
+					break;
+					case 10:cout<<"октября"<<endl;
+					break;
+					case 11:cout<<"ноября"<<endl;
+					break;
+					case 12:cout<<"декабря"<<endl;
+					break;
+					default: ;
+				}
 			}
 		}
-	}
 	
 	while(day>7)
 	{
-	day-=7;
+		day-=7;
 	}
 	switch(day)
 		{
@@ -78,6 +84,7 @@ void main()
 		case 7: cout<<"четверг"<<endl;
 		break;
 		default:;
+		}
 	}
 	system("pause");
 }
