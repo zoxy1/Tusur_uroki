@@ -13,24 +13,72 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-    double e = 0.0001; // заданная точность
-    double a;
-	double x0, x1 = 1,tol=0;
-    cout << "Введите число:";
-    cin >> a;
-    do {
-        x0 = x1; // запоминаем предыдущее значение
-        x1 = 0.5*(x0 + a/x0); 
-        tol=x1-x0; //вычисляем разницу между вычисленным в данном цикле и предыдущем цикле 
-		if(tol<0) // если разница < 0 домножаем на -1
+ 
+	cout<<"Введите номер дня в 2016 году:";
+	int number=0,day=0;
+	//char month[]={0,31,29,31,30,31,30,31,31,30,31,30,31};
+	int month[]={0,31,60,91,121,152,182,244,275,305,336,366,397};
+	cin>>number;
+	day=number;
+	for(int i=1;i<=12;i++)
+	{
+		if((number<=month[i])&&(number>month[i-1]))
+		{
+			number-=month[i-1];
+			cout<<number<<" ";
+			switch(i)
 			{
-			tol*=-1;
+			case 1:cout<<"января ";
+			break;
+			case 2:cout<<"февраля ";
+			break;
+			case 3:cout<<"марта ";
+			break;
+			case 4:cout<<"апреля ";
+			break;
+			case 5:cout<<"мая" ;
+			break;
+			case 6:cout<<"июня ";
+			break;
+			case 7:cout<<"июля" ;
+			break;
+			case 8:cout<<"августа ";
+			break;
+			case 9:cout<<"сентября ";
+			break;
+			case 10:cout<<"октября"<<endl;
+			break;
+			case 11:cout<<"ноября"<<endl;
+			break;
+			case 12:cout<<"декабря"<<endl;
+			break;
+			default: ;
 			}
-	} 
-	while(tol > e); // разность tol < заданной точности e, то заканчиваем цикл
-	cout.precision(40); // устанавливаем точность вывода double до запятой 20 знаков и 20 знаков после запятой
-    cout << "Квадратный корень числа при е=0.0001 равен:"<<endl<<x1<<endl;
-    cout << "sqrt(x) = "<<endl<<sqrt(a) << endl;
-   	system("pause");
+		}
+	}
+	
+	while(day>7)
+	{
+	day-=7;
+	}
+	switch(day)
+		{
+		case 1: cout<<"пятница"<<endl;
+		break;
+		case 2: cout<<"суббота"<<endl;
+		break;
+		case 3: cout<<"воскресенье"<<endl;
+		break;
+		case 4: cout<<"понедельник"<<endl;
+		break;
+		case 5: cout<<"вторник"<<endl;
+		break;
+		case 6: cout<<"среда"<<endl;
+		break;
+		case 7: cout<<"четверг"<<endl;
+		break;
+		default:;
+	}
+	system("pause");
 }
 
