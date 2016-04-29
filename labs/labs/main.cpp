@@ -5,8 +5,6 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include <math.h>
-#include <iomanip>
 using namespace std;
 
 		
@@ -32,7 +30,7 @@ void main()
 	} 
 	while(tol > e); // разность tol < заданной точности e, то заканчиваем цикл
 	cout.precision(40); // устанавливаем точность вывода double до запятой 20 знаков и 20 знаков после запятой
-    cout << "Квадратный корень числа при е=0.0001 равен:"<<endl<<x1<<endl;
+    cout << "Квадратный корень числа при точности е=0.0001 равен:"<<endl<<x1<<endl;
     cout << "sqrt(x) = "<<endl<<sqrt(a) << endl;
    	system("pause");
 }
