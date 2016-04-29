@@ -5,22 +5,9 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
+#include <math.h>
 using namespace std;
-float koreny(int a,int e)
-{
-	float x=0;
-	
-	
-		if(e!=0)
-		{
-			x=0.5*(koreny(a,(e-1))+a/koreny(a,(e-1)));
-			return x;
-		}
-			else 
-			{
-				return x;
-			}
-}
+
 		
 void main()
 {
@@ -28,14 +15,28 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-int e=0;
-float a=0,xn=1;
-cout<<"Введите точность вычисления корня e: ";
-cin>>e;
-cout<<"Введите число a: ";
-cin>>a;
+    int e = 0.000000001;
+    double a;
+	double x0, x1 = 1,tol=0;
+    int iter = 0;
+    cout << "Введите число:";
+    cin >> a;
+    do {
+        x0 = x1;
+        x1 = 0.5*(x0 + a/x0);
+        ++iter;
+		tol=x1-x0;
+		if(tol<0)
+			{
+			tol*=-1;
+			}
+	} 
+	while(tol > e);
+    
+    cout << "Квадратный корень числа" <<endl<<"равен:"<<x1<<endl;
+    cout << "sqrt(x) = " << sqrt(a) << endl;
+    cout << "      n = " << iter << endl;
 
-cout<<"Корень числа "<<a<<" равен:"<<koreny(a,e)<<endl;
-system("pause");
+	system("pause");
 }
 
