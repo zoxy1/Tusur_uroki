@@ -6,7 +6,6 @@
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 using namespace std;
-
 		
 void main()
 {
