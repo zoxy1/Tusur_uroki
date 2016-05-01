@@ -16,12 +16,10 @@ void main()
  
 	
 	unsigned long int number=0,year=0;
-	unsigned long int day=0,visok=0,dney=0;
-	//char month[]={0,31,29,31,30, 31, 30, 31, 31, 30, 31, 30, 31};
+	unsigned long int day=0,visok_day=0,no_visok_day=0;
 	int month[]=         {0,31,60,91,121,152,182,213,244,274,305,335,366};
 	cout<<"Введите год:";
 	cin>>year;
-	
 	cout<<"Введите номер дня в " <<year<<" году:";
 	cin>>number;
 	if(number>366)
@@ -37,16 +35,10 @@ void main()
 				month[i]+=1;
 			}
 			cout<<"Высокосный год"<<endl;
-		
 		}	
-		else
-
-		{
-			
-		}
-		visok=(year-1)/4;
-		dney=365*(year-1);
-		day=number+visok+dney;
+		visok_day=((year-1)/4)-1; // считаем сколько всего высокосных лет
+		no_visok_day=365*(year-1); // считаем сколько всего дней без учета высокостных
+		day=number+visok_day+no_visok_day;
 		
 		for(int i=1;i<=12;i++)
 		{
@@ -85,27 +77,15 @@ void main()
 			}
 		}
 	
-	while(day>7)
+	if(day>7)
 	{
-		day-=7;
+		unsigned long int temp;
+		temp=day/7;
+		day-=temp*7;
 	}
-	switch(day)
-		{
-		/*case 1: cout<<"пятница"<<endl;
-		break;
-		case 2: cout<<"суббота"<<endl;
-		break;
-		case 3: cout<<"воскресенье"<<endl;
-		break;
-		case 4: cout<<"понедельник"<<endl;
-		break;
-		case 5: cout<<"вторник"<<endl;
-		break;
-		case 6: cout<<"среда"<<endl;
-		break;
-		case 7: cout<<"четверг"<<endl;
-		break;*/
 		
+		switch(day)
+		{
 		case 1: cout<<"понедельник"<<endl;
 		break;
 		case 2: cout<<"вторник"<<endl;
