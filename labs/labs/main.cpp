@@ -10,8 +10,8 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include <string>
-#include <iomanip>
+#include <string> //необходима для работы со строками
+#include <iomanip> //необходима для setw() задание ширины поля вывода данных 
 using namespace std;
 
 struct uch_struct //объявляем структуру участника спортивных состязаний
