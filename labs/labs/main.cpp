@@ -11,13 +11,14 @@
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <string>
+#include <iomanip>
 using namespace std;
 
-struct uch_struct
+struct uch_struct //объявляем структуру участника спортивных состязаний
 {
 string Familia;
 unsigned char kod;
-unsigned int ball;
+unsigned int bal;
 unsigned int mesto;
 };
 
@@ -28,24 +29,61 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
- 
-	uch_struct uchastnik[4];
-	
-	for(int i=1;i<=3;i++)
+	uch_struct uchastnik[4]; // инициализируем массив структур
+	string shapka[5]={"№ ","Фамилия участника","Код команды","Количество балов","Место в итоге"};
+	int pos=20; // ширина поля вывода в таблице
+		
+	for(int i=1;i<=3;i++) // цикл ввода трех участников состязаний
 	{
-	cout<<"введите через пробел фамилию "<<i<<"-го участника:";
-	cin>>uchastnik[i].Familia;
-	cout<<endl<<"введите код команды:";
-	cin>>uchastnik[i].kod;
-	cout<<endl<<"введите балл команды:";
-	cin>>uchastnik[i].ball;
-	cout<<endl<<"введите итоговое место команды:";
-	cin>>uchastnik[i].mesto;
-	cout<<endl;
+		cout<<"введите через пробел фамилию "<<i<<"-го участника:";
+		cin>>uchastnik[i].Familia; // вводим фамилию участника
+		cout<<endl<<"введите код команды:";
+		cin>>uchastnik[i].kod; // вводим код команды 
+		cout<<endl<<"введите балл команды:";
+		cin>>uchastnik[i].bal; // вводим количество набранных балов
+		cout<<endl<<"введите итоговое место команды:";
+		cin>>uchastnik[i].mesto; // вводим итоговое место
+		cout<<endl;
+	}
+	//for(int i=1;i<=3;i++)
+	//{
+	//	//cout<<"введите через пробел фамилию "<<i<<"-го участника:";
+	//	uchastnik[i].Familia="Попов";
+	//	
+	//	uchastnik[i].kod='С';
+	//	
+	//	uchastnik[i].bal=100;
+	//	
+	//	uchastnik[i].mesto=2;
+	//	
+	//}
+	
+	
+	system("cls"); //очищаем экран
+	cout<<endl<<"Ведомость спортивных состязаний:"<<endl<<endl;
+	
+	for(int i=0;i<=3;i++) //выводим таблицу состязаний
+	{
+		if(i==0) // если первая строка выводим шапку таблицы
+		{
+			for(int j=0;j<5;j++)
+			{
+				cout<<shapka[j]<<setw(pos)<<left;	
+			}
+		}
+			
+		else
+		{
+			cout<<i<<" ";
+			cout<<setw(pos)<<left<<uchastnik[i].Familia;//выводим фамилию участника	
+			cout<<setw(pos)<<left<<uchastnik[i].kod;	//выводим код команды участника	
+			cout<<setw(pos)<<left<<uchastnik[i].bal;	//выводим количество баллов
+			cout<<setw(pos)<<left<<uchastnik[i].mesto;	//выводим итоговое место
+		}
+		cout<<setw(1)<<endl;		
 	}
 
-
-
-	system("pause");
+cout<<endl;
+system("pause"); // команда задержки экрана
 }
 
