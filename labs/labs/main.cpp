@@ -3,8 +3,6 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include <string>
-//#include <iomanip>
 using namespace std;
 
 void main()
@@ -13,43 +11,21 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	uch_struct uchastnik[4]; // инициализируем массив структур
-	string shapka[5]={"№ ","Фамилия участника","Код команды","Количество балов","Место в итоге"}; // шапка таблицы
-	int pos=20; // ширина поля вывода данных в таблице
+	int chisla[5];
 		
-	for(int i=;i<=3;i++) // цикл ввода данных о трех участниках состязаний
+	for(int i=0;i<5;i++) // цикл ввода пяти пятизначных чисел
 	{
-		cout<<"введите через пробел фамилию "<<i<<"-го участника:";
-		cin>>uchastnik[i].Familia; // вводим фамилию участника
-		cout<<endl<<"введите код команды:";
-		cin>>uchastnik[i].kod; // вводим код команды 
-		cout<<endl<<"введите балл команды:";
-		cin>>uchastnik[i].bal; // вводим количество набранных балов
-		cout<<endl<<"введите итоговое место команды:";
-		cin>>uchastnik[i].mesto; // вводим итоговое место
-		cout<<endl;
+	cout<<"Введите "<<i+1<<"-ое пятизначное число:";
+	cin>>chisla[i];
 	}
-	cout<<endl<<"Ведомость спортивных состязаний:"<<endl<<endl;
-	
-	for(int i=0;i<=3;i++) //выводим таблицу состязаний
+
+	cout<<"Выводим числа, которые совпадают с числами (12321, 55555, 11611):"<<endl;
+	for(int i=0;i<5;i++) 
 	{
-		if(i==0) // если первая строка выводим шапку таблицы
+		if(chisla[i]==12321||chisla[i]==55555||chisla[i]==11611) // выводим числа которые совпадают с (12321, 55555, 11611)
 		{
-			for(int j=0;j<5;j++)
-			{
-				cout<<shapka[j]<<setw(pos)<<left;	
-			}
-		}
-			
-		else
-		{
-			cout<<i<<" "; // выводим номер участника
-			cout<<setw(pos)<<left<<uchastnik[i].Familia;//выводим фамилию участника	
-			cout<<setw(pos)<<left<<uchastnik[i].kod;	//выводим код команды участника	
-			cout<<setw(pos)<<left<<uchastnik[i].bal;	//выводим количество баллов
-			cout<<setw(pos)<<left<<uchastnik[i].mesto;	//выводим итоговое место
-		}
-		cout<<setw(1)<<endl; // переходим на новую строку		
+			cout<<chisla[i]<<endl;
+		}	
 	}
 
 cout<<endl; // переходим на новую строку	
