@@ -10,17 +10,25 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-using namespace std;
 
+using namespace std;
+struct struct_student
+{
+	char Familia [10];
+	int exz;
+	int otcenki[10];
+};
 void main()
 {
 	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
+struct_student student[10];
 
 
-cout<<endl; // переходим на новую строку	
+
+
 system("pause"); // команда задержки экрана
 }
 
