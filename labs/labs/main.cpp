@@ -11,32 +11,47 @@
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include<string.h>
+#include <stdlib.h> 
+#include <math.h> 
 using namespace std;
 struct struct_student
 {
-	string familia;
+	
+	//char buff[] = "Hello \" world";
+	char familia[10];
 	int exz;
 	int otcenki[4];
 };
-int uspevaemosty(struct_student *ptr)
+int uspevaemosty(struct_student *ptr) //функция проверяет какие студенты сдали экзамены на 4 и 5, а какие нет 
 {
-	int number=0;
-	for(int i=0;i<ptr->exz;i++)
+	int number=0; 
+	int static in1=0,in2=0; // переменные имеют статический тип памяти, т к должны сохранять значения при выходе из функции
+	for(int i=0;i<ptr->exz;i++) // цикл пробегает по всем оценкам студента
 	{
-		if(ptr->otcenki[i] ==5||ptr->otcenki[i]==4)
+		if(ptr->otcenki[i] ==5||ptr->otcenki[i]==4) // проверка сданы ли экзамены на 4 и 5
 		{
-			number++;
+			number++; //переменная считает количество экзаменов сданных на 4 и 5 
 		}
 	}
-	if(number==ptr->exz)
+	if(number==ptr->exz) //если все экзамены сданы на 4 и 5 выводим фамилию студента
 	{
-		cout<<"Все экзамены сданы на 4 и 5."<<endl;
-	return 1;
+		if(in1==0) // один раз выводим заголовок "Следующие студенты сдали экзамены на 4 и 5:"
+		{
+			cout<<endl<<"Следующие студенты сдали экзамены на 4 и 5:"<<endl;
+			in1++; // прибавляем 1 чтобы следующий раз не выводить сообщение
+		}			
+		cout<<ptr->familia<<endl; // выводим фамилию студента
+	return 1; // возращаем значение функции равное 1
 	}
 	else
 	{
-		cout<<"Не все экзамены сданы на 4 и 5"<<endl;
-	return 0;
+		if(in2==0) // один раз выводим заголовок "Следующие студенты не сдали экзамены на 4 и 5:"
+		{
+			cout<<endl<<"Следующие студенты не сдали экзамены на 4 и 5:"<<endl;
+			in2++; // прибавляем 1 чтобы следующий раз не выводить сообщение
+		}		
+	cout<<ptr->familia<<endl; // выводим фамилию студента
+	return 0; // возращаем значение функции равное 1
 	}
 }
 
@@ -46,8 +61,12 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	int stud45=0, stud23=0;
-
+int stud45=0, stud23=0;
+char name0[]="Иванов";
+char name1[]="Петров";
+char name2[]="Сидоров";
+char name3[]="Попов";
+char name4[]="Задорнов";
 struct_student student[5];
 struct_student * ptr_student[5];
 ptr_student[0]=&student[0];
@@ -55,31 +74,31 @@ ptr_student[1]=&student[1];
 ptr_student[2]=&student[2];
 ptr_student[3]=&student[3];
 ptr_student[4]=&student[4];
-student[0].familia="Иванов";
+strcpy(student[0].familia,name0);
 student[0].exz=4;
-student[0].otcenki[0]=3;
+student[0].otcenki[0]=5;
 student[0].otcenki[1]=4;
 student[0].otcenki[2]=5;
 student[0].otcenki[3]=5;
-student[1].familia="Петров";
+strcpy(student[1].familia,name1);
 student[1].exz=4;
 student[1].otcenki[0]=4;
 student[1].otcenki[1]=5;
-student[1].otcenki[2]=2;
+student[1].otcenki[2]=4;
 student[1].otcenki[3]=5;
-student[2].familia="Сидоров";
+strcpy(student[2].familia,name2);
 student[2].exz=4;
 student[2].otcenki[0]=5;
 student[2].otcenki[1]=4;
 student[2].otcenki[2]=3;
 student[2].otcenki[3]=4;
-student[3].familia="Попов";
+strcpy(student[3].familia,name3);
 student[3].exz=4;
 student[3].otcenki[0]=4;
 student[3].otcenki[1]=5;
-student[3].otcenki[2]=3;
+student[3].otcenki[2]=5;
 student[3].otcenki[3]=5;
-student[4].familia="Задорнов";
+strcpy(student[4].familia,name4);
 student[4].exz=4;
 student[4].otcenki[0]=5;
 student[4].otcenki[1]=5;
@@ -98,6 +117,7 @@ for(int i=0;i<5;i++)
 		}
 	}
 cout<<(stud45*100/(stud45+stud23))<<"% студентов сдало на 4 и 5"<<endl;
+
 
 system("pause"); // команда задержки экрана
 }
