@@ -7,8 +7,6 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-//#include <fstream>  // подключаем для работы с файлми
-#include<cstdlib>
 #include <iomanip> //необходима для setw() задание ширины поля вывода данных 
 using namespace std;
 struct struct_student // описываем структуру struct_student включающую фамилию, количество экзаменов, оценки за экзамены
@@ -72,30 +70,28 @@ for(int i=0;i<10;i++)
 		}
 
 	}
-
-
-cout<<endl<<"Остальным в порядке уменьшения среднего балла"<<endl;
- for (int i = 0; i < stud_count; i++) //для сортировки используем метод пузырьков,  
+//для сортировки используем метод пузырька
+char temp1[60]; 
+for (int i = 0; i < stud_count; i++) // начинаем с конца до нулевого элемента, затем с конца до первого и т д
     {
-        for (int j = stud_count - 1; j > i; j--) //начиная с последнего сравниваем с 
-        {
-           	if (stud2[j].bal < stud2[j - 1].bal)
+        for (int j = stud_count - 1; j > i; j--) //начинаем с послднего элемента
+		{
+           	if (stud2[j].bal > stud2[j - 1].bal) // если последний элемент больше предыдущего, то меняем их местами
             {
-				swap (stud2[j].bal, stud2[j - 1].bal); // меняем местами  
-            }
+				swap (stud2[j].bal, stud2[j - 1].bal);  // меняем местами среднее значения балла  
+                //меняем местами ФИО студентов 
+				strcpy(temp1,stud2[j].FIO);				
+				strcpy(stud2[j].FIO,stud2[j-1].FIO);
+				strcpy(stud2[j-1].FIO,temp1);
+			}
         }
     }
-
-
-
-
-for(int i=0;i<stud_count;i++)
+cout<<endl<<"Остальным в порядке уменьшения среднего балла"<<endl;
+for(int i=0;i<stud_count;i++)//Выводим в порядке уменьшения среднего бала ФИО студентов второй очереди
 {
 	cout<<"Средний бал:"<<setw(4)<<left<<stud2[i].bal<<" ";
 	cout<<stud2[i].FIO<<endl;
 }
-
-
-system("pause"); // команда задержки экрана
+system("pause"); // команда задержки  экрана
 }
 
