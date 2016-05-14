@@ -10,17 +10,13 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include<string.h>
-#include <stdlib.h> 
-#include <math.h> 
+#include <fstream>  // подключаем для работы с файлми
 using namespace std;
-struct struct_student
+struct struct_student // описываем структуру struct_student включающую фамилию, количество экзаменов, оценки за экзамены
 {
-	
-	//char buff[] = "Hello \" world";
-	char familia[10];
-	int exz;
-	int otcenki[4];
+	char familia[10]; //фамилии
+	int exz;		  // количество экзаменов
+	int otcenki[4];   //массив оценок
 };
 int uspevaemosty(struct_student *ptr) //функция проверяет какие студенты сдали экзамены на 4 и 5, а какие нет 
 {
@@ -40,7 +36,7 @@ int uspevaemosty(struct_student *ptr) //функция проверяет как
 			cout<<endl<<"Следующие студенты сдали экзамены на 4 и 5:"<<endl;
 			in1++; // прибавляем 1 чтобы следующий раз не выводить сообщение
 		}			
-		cout<<ptr->familia<<endl; // выводим фамилию студента
+	cout<<ptr->familia<<endl; // выводим фамилию студента
 	return 1; // возращаем значение функции равное 1
 	}
 	else
@@ -54,71 +50,70 @@ int uspevaemosty(struct_student *ptr) //функция проверяет как
 	return 0; // возращаем значение функции равное 1
 	}
 }
-
+void print_to_file(int pr)// функция записи в в файл, принимает значение типа int - процен сдавших на 4 и 5
+	{
+    ofstream my_file; // создаем переменную типа ofstream
+    my_file.open("text.txt"); // открываем файл text.txt
+	my_file<<pr<<"% студентов сдало на 4 и 5."; //пишем в файл процент студентов сдавших на 4 и 5
+	my_file.close(); // закрываем файл
+	}
 void main()
 {
 	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-int stud45=0, stud23=0;
-char name0[]="Иванов";
-char name1[]="Петров";
-char name2[]="Сидоров";
-char name3[]="Попов";
-char name4[]="Задорнов";
-struct_student student[5];
-struct_student * ptr_student[5];
-ptr_student[0]=&student[0];
-ptr_student[1]=&student[1];
-ptr_student[2]=&student[2];
-ptr_student[3]=&student[3];
-ptr_student[4]=&student[4];
-strcpy(student[0].familia,name0);
-student[0].exz=4;
-student[0].otcenki[0]=5;
+int stud45=0, stud=0; // stud45 - количество студентов сдавших на 4 и 5, stud - количество остальных студентов
+int procent=0; // процент студентов сдавших на 4 и 5
+char name[5][20]={"Иванов","Петров","Сидоров","Попов","Задорнов"}; // Вводим фамилии студентов
+struct_student student[5]; //инициализируем массив структур типа struct_student
+struct_student * ptr_student[5]; // инициализируем массив указателей типа struct_student
+for(int i=0;i<5;i++) 
+{
+	ptr_student[i]=&student[i]; // массиву указателей присваиваем адреса структур, чтобы можно было работать со структурами через указатели в функции uspevaemosty()
+	strcpy(student[i].familia,name[i]); // копируем фамилии в структуры
+	student[i].exz=4; // задаем количество экзаменов сданных студентом
+}
+
+student[0].otcenki[0]=5; // вводим оценки студентов
 student[0].otcenki[1]=4;
 student[0].otcenki[2]=5;
 student[0].otcenki[3]=5;
-strcpy(student[1].familia,name1);
-student[1].exz=4;
+
 student[1].otcenki[0]=4;
 student[1].otcenki[1]=5;
 student[1].otcenki[2]=4;
 student[1].otcenki[3]=5;
-strcpy(student[2].familia,name2);
-student[2].exz=4;
+
 student[2].otcenki[0]=5;
 student[2].otcenki[1]=4;
 student[2].otcenki[2]=3;
 student[2].otcenki[3]=4;
-strcpy(student[3].familia,name3);
-student[3].exz=4;
+
 student[3].otcenki[0]=4;
 student[3].otcenki[1]=5;
 student[3].otcenki[2]=5;
 student[3].otcenki[3]=5;
-strcpy(student[4].familia,name4);
-student[4].exz=4;
+
 student[4].otcenki[0]=5;
 student[4].otcenki[1]=5;
 student[4].otcenki[2]=5;
 student[4].otcenki[3]=5;
 
-for(int i=0;i<5;i++)
+for(int i=0;i<5;i++) // пробегаем по всем студентам
 	{
-		if(uspevaemosty(ptr_student[i])==1)
+		if(uspevaemosty(ptr_student[i])==1) // проверяем сдали ли на 4 и 5
 		{
-			stud45++;
+			stud45++; // считаем студентов сдавших на 4 и 5
 		}
 		else
 		{
-			stud23++;
+			stud++; // считаем студентов не сдавших на 4 и 5
 		}
 	}
-cout<<(stud45*100/(stud45+stud23))<<"% студентов сдало на 4 и 5"<<endl;
-
-
+procent=stud45*100/(stud45+stud); // Вычисляем процент студентов сдавших экзамены на 4 и 5
+cout<<procent<<"% студентов сдало на 4 и 5"<<endl; //выводим процент студентов сдавших на 4 и 5 
+print_to_file(procent); // функция записивает в файл процент студентов сдавших на 4 и 5 
 system("pause"); // команда задержки экрана
 }
 
