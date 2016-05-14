@@ -8,6 +8,8 @@
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 //#include <fstream>  // подключаем для работы с файлми
+
+#include <iomanip> //необходима для setw() задание ширины поля вывода данных 
 using namespace std;
 struct struct_student // описываем структуру struct_student включающую фамилию, количество экзаменов, оценки за экзамены
 {
@@ -92,7 +94,7 @@ for(int i=0;i<10;i++)
 {
 	if(student[i].income<incom2)
 	{
-		cout<<"Доход:"<<student[i].income<<" "<<student[i].FIO<<endl;
+		cout<<"Доход:"<<student[i].income<<setw(20)<<right<<" "<<student[i].FIO<<endl;
 		stud[i]=1;
 	}
 	else
