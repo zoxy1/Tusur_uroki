@@ -9,13 +9,16 @@
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <iomanip> //необходима для setw() задание ширины поля вывода данных 
+#include <time.h>
+#include <dos.h>
+#include <conio.h>
 using namespace std;
-struct struct_student // описываем структуру struct_student включающую фамилию, количество экзаменов, оценки за экзамены
+struct struct_person // описываем структуру struct_student включающую фамилию, количество экзаменов, оценки за экзамены
 {
 	char FIO[60]; //фамилия имя отчество
-	int group;	  //количество экзаменов
-	float bal;    //средний бал
-	int income; //доход на члена семьи
+	int year;	  //год рождения
+	char vuz[100];    //название вуза
+	int bal; //количество баллов набранных в конкурсе
 };
 
 void main()
@@ -24,75 +27,86 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-int incom2=12000; // две минимальные зарплаты
-int stud[10]; 
+int N;
+int local_year=0;
+// Инициализируем массив с ФИО 
+char name[5][60]={"Петин Иван Дмитриевич","Халеев Иван Сергеевич","Худякова Антонина Павловна",
+	"Шариков Борис Николаевич",	"Данилин Виктор Иванович"}; 
+int years[5]={1980,1985,1990,1995,2000}; //  массив год рождения участников конкурса
+char vuzs[5][100]={"ТУСУР","Политехнический университет","Педодагический университет","ТГУ", "ТГАСУ"};
+int bals[10]={50, 55, 32, 43, 50}; // массив с набранными баллами
+cout<<"Введите количество учавствующих в конкурсе человек:";
+cin>>N;
+struct_person *person = new struct_person[N]; // создаем массив структур типа struct_student
+SYSTEMTIME lt;
+GetLocalTime(&lt);
+local_year=lt.wYear; // присваиваем текущий год переменной local_year
+for(int i=0;i<N;i++) 
+{
+strcpy(person[i].FIO,name[i]); // копируем ФИО в структуру
+person[i].year=local_year-years[i]; // вычисляем возраст участника и копируем в структуру
+strcpy(person[i].vuz,vuzs[i]); // копируем ФИО в структуру
+person[i].bal=bals[i]; //копируем баллы в структуру
+}
+int year_low=0, year_high;
 int stud_count=0;
-// Инициализируем массив с ФИО студентов
-char name[10][60]={"Петин Иван Дмитриевич","Халеев Иван Сергеевич","Худякова Антонина Павловна",
-	"Шариков Борис Николаевич",	"Данилин Виктор Иванович","Шакурова Разина Шакуровна",
-	"Кузнецова Марина Александровна","Чистякова Тамара Васильевна","Гаврилова Мария Григорьевна","Нефёдова Евдокия Ивановна "}; 
-int groups[10]={120,121,122,123,124,125,126,127,128,129}; //  массив с именем группы студентов
-float bals[10]={4.5, 5, 3.2, 4.3, 4.9, 2.8, 3.9, 4 ,3.5, 3.3}; // массив со средним балом студентов
-int incomes[10]={10000,15000,7000,20000,4000,25000,8000,15000,9500,1400}; // массив с доходом на члена семьи студентов
-struct_student student[10]; //инициализируем массив структур типа struct_student
-for(int i=0;i<10;i++) 
+int stud[10];
+cout<<"Введите возрастную группу, нижний возраст лет:";
+cin>>year_low;
+cout<<"Введите возрастную группу верхний возраст лет:";
+cin>>year_high;
+for(int i=0;i<N;i++) 
 {
-strcpy(student[i].FIO,name[i]); // копируем ФИО в структуры
-student[i].group=groups[i]; // копируем группы в структуры
-student[i].bal=bals[i]; //копируем баллы в структуры
-student[i].income=incomes[i]; // копируем доход на члена семьи
+if((person[i].year>=year_low)&&(person[i].year<=year_high)) // если участник попадает в возрастную группу, выполняем следующее
+	{
+		stud[i]=1; //запоминаем участников, которые попали в возрастную группу
+		stud_count++; // считаем количество участников попавших в возрастную группу
+	}
 }
-cout<<"Общежитие в первую очередь предоставляется студентам,"<<endl;
-cout<<"у которых доход на члена семьи меньше "<<incom2<<" рублей:"<<endl<<endl;
+struct_person *person_grup = new struct_person[stud_count]; // создаем массив структур типа struct_person
 
-for(int i=0;i<10;i++)
-{
-	if(student[i].income<incom2) // проверяем если доход на члена семьи меньше чем incom2, то выполняем следующее
-	{
-		cout<<"Доход:"<<setw(5)<<left<<student[i].income<<" ";
-		cout<<student[i].FIO<<endl; //выводим ФИО студента
-		stud[i]=1; // относим студента к первой очереди
-	}
-	else
-	{
-		stud[i]=2; // относим студента ко второй очереди
-		stud_count++; // считаем сколько студентов попало во вторую очередь
-	}
-}
-struct_student *stud2 = new struct_student[stud_count]; // создаем массив структур типа struct_student
 int k=0;
-for(int i=0;i<10;i++)
+for(int i=0;i<N;i++)
 	{
-		if(stud[i]==2) //если студент попал во вторую очередь копируем его ФИО и средний бал в stud2 
+		if(stud[i]==1) //если попал в возрастную группу копируем его данные в новую структуру person_grup
 		{
-			strcpy(stud2[k].FIO,student[i].FIO);
-			stud2[k].bal=student[i].bal;
+			strcpy(person_grup[k].FIO,person[i].FIO);
+			person_grup[k].year=person[i].year;
+			strcpy(person_grup[k].vuz,person[i].vuz);
+			person_grup[k].bal=person[i].bal;
 			k++;
 		}
 
 	}
 //для сортировки используем метод пузырька
-char temp1[60]; 
+char temp1[100]; 
 for (int i = 0; i < stud_count; i++) // начинаем с конца до нулевого элемента, затем с конца до первого и т д
     {
         for (int j = stud_count - 1; j > i; j--) //начинаем с послднего элемента
 		{
-           	if (stud2[j].bal > stud2[j - 1].bal) // если последний элемент больше предыдущего, то меняем их местами
+           	if (person_grup[j].bal > person_grup[j - 1].bal) // если последний элемент больше предыдущего, то меняем их местами
             {
-				swap (stud2[j].bal, stud2[j - 1].bal);  // меняем местами среднее значения балла  
+				swap (person_grup[j].year, person_grup[j - 1].year);  // меняем местами возраст участников 
                 //меняем местами ФИО студентов 
-				strcpy(temp1,stud2[j].FIO);				
-				strcpy(stud2[j].FIO,stud2[j-1].FIO);
-				strcpy(stud2[j-1].FIO,temp1);
+				strcpy(temp1,person_grup[j].FIO);				
+				strcpy(person_grup[j].FIO,person_grup[j-1].FIO);
+				strcpy(person_grup[j-1].FIO,temp1);
+				//меняем название вузов
+				strcpy(temp1,person_grup[j].vuz);				
+				strcpy(person_grup[j].vuz,person_grup[j-1].vuz);
+				strcpy(person_grup[j-1].vuz,temp1);
+				swap (person_grup[j].bal, person_grup[j - 1].bal); //меняем балы местами 
 			}
         }
     }
-cout<<endl<<"Остальным в порядке уменьшения среднего балла"<<endl;
-for(int i=0;i<stud_count;i++)//Выводим в порядке уменьшения среднего бала ФИО студентов второй очереди
+
+for(int i=0;i<stud_count;i++)//Выводим в порядке уменьшения балов ФИО участника 
 {
-	cout<<"Средний бал:"<<setw(4)<<left<<stud2[i].bal<<" ";
-	cout<<stud2[i].FIO<<endl;
+	cout<<i+1<<"-ое место "<<setw(4)<<left<<person_grup[i].bal<<"бал. ";
+	cout<<person_grup[i].FIO<<endl;
 }
+delete person;
+delete person_grup;
 system("pause"); // команда задержки  экрана
 }
 
