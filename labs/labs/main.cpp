@@ -92,6 +92,7 @@ for(int i=0;i<stud_count;i++)//Выводим в порядке уменьшен
 	cout<<"Средний бал:"<<setw(4)<<left<<stud2[i].bal<<" ";
 	cout<<stud2[i].FIO<<endl;
 }
+delete stud2; // освобождаем память выделенную под структуру stud2
 system("pause"); // команда задержки  экрана
 }
 
