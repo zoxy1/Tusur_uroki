@@ -9,9 +9,6 @@
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include <iomanip> //необходима для setw() задание ширины поля вывода данных 
-#include <time.h>
-#include <dos.h>
-#include <conio.h>
 using namespace std;
 struct struct_person // описываем структуру struct_student включающую фамилию, количество экзаменов, оценки за экзамены
 {
@@ -30,11 +27,15 @@ void main()
 int N;
 int local_year=0;
 // Инициализируем массив с ФИО 
-char name[5][60]={"Петин Иван Дмитриевич","Халеев Иван Сергеевич","Худякова Антонина Павловна",
-	"Шариков Борис Николаевич",	"Данилин Виктор Иванович"}; 
+char name[5][60]={
+	"Петин Иван Дмитриевич",
+	"Халеев Иван Сергеевич",
+	"Худякова Антонина Павловна",
+	"Шариков Борис Николаевич",	
+	"Данилин Виктор Иванович"}; 
 int years[5]={1980,1985,1990,1995,2000}; //  массив год рождения участников конкурса
 char vuzs[5][100]={"ТУСУР","Политехнический университет","Педодагический университет","ТГУ", "ТГАСУ"};
-int bals[10]={50, 55, 50, 50, 50}; // массив с набранными баллами
+int bals[10]={40, 60, 60, 70, 70}; // массив с набранными баллами
 cout<<"Введите количество учавствующих в конкурсе человек:";
 cin>>N;
 struct_person *person = new struct_person[N]; // создаем массив структур типа struct_student
@@ -63,7 +64,7 @@ if((person[i].year>=year_low)&&(person[i].year<=year_high)) // если учас
 		stud_count++; // считаем количество участников попавших в возрастную группу
 	}
 }
-struct_person *person_grup = new struct_person[stud_count]; // создаем массив структур типа struct_person
+struct_person *person_grup = new struct_person[stud_count]; // создаем массив структур типа struct_person 
 
 int k=0;
 for(int i=0;i<N;i++)
@@ -99,33 +100,34 @@ for (int i = 0; i < stud_count; i++) // начинаем с конца до ну
 			}
         }
     }
-int repeat=0,mesto=1;
-for(int i=0;i<N;i++)//Выводим в порядке уменьшения балов данные участника 
+int mesto=1,mesto_sovmes=0;
+for(int i=0;i<N;i++) 
 {
-	cout<<mesto<<"-ое место "<<endl;
-	cout<<setw(4)<<left<<person_grup[i].bal<<"бал. ";
-	cout<<person_grup[i].FIO<<" ("<<setw(4)<<left<<person_grup[i].vuz<<")"<<endl;
-	for(int j=0;j<N-1;j++)
+	cout<<mesto<<"-ое место "<<endl; // выводим занимаемое место участника
+	for(int j=i;j<N;j++) 
 	{
-		if(person_grup[i].bal==person_grup[j].bal)
+		if(person_grup[i].bal==person_grup[j].bal) //проверяем есть ли участники с одинаковыми балами
 		{
-			if(i!=j)
+			// выводим балы участника и его данные
+			cout<<setw(4)<<left<<person_grup[j].bal<<"бал. ";
+			cout<<person_grup[j].FIO<<" ("<<setw(4)<<left<<person_grup[j].vuz<<")"<<endl;
+			
+			if(i!=j) //если есть еще участник с таким же количеством балов, то пропускаем его при выводе участников занявших следующее место
 			{
-				cout<<setw(4)<<left<<person_grup[j].bal<<"бал. ";
-				cout<<person_grup[j].FIO<<" ("<<setw(4)<<left<<person_grup[j].vuz<<")"<<endl;
-				
-				repeat=j;
+				i++;	
 			}
-		
 		}
-	
-		//mesto++;
+		
 	}
-	i=repeat+1;
-	mesto++;
+	
+	mesto++; //переходим на следующее место
+	if(mesto>3) // если место >3го выходим из цикла for
+	{
+		break;
+	}
 }
-delete person;
-delete person_grup;
+delete person; // удаляем память выделенную для структуры person
+delete person_grup; // удаляем память выделенную для структуры person_group
 system("pause"); // команда задержки  экрана
 }
 
