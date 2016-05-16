@@ -30,13 +30,13 @@ float a;
 float b; 
 	
 	
-double summ() //метод вычисляет сумму чисел a и b
+void summ() //метод вычисляет сумму чисел a и b
 {
-	return a+b;
+	cout<<"a+b="<<a+b<<endl;
 }
-double minus() //метод вычисляет разность чисел a и b
+void minus() //метод вычисляет разность чисел a и b
 {
-	return a-b;
+	cout<<"a-b="<<a-b<<endl;
 }
 double umnogit() //метод вычисляет произведение чисел a и b
 {
@@ -59,30 +59,30 @@ private: // После объявления private следуют данные 
 
 };
 
-class Second_calculate : public calculate   // производный класс от класса calculate
-{
-public:
+//class Second_calculate : public calculate   // производный класс от класса calculate
+//{
+//public:
 
-int summ1;
+//int summ1;
 //	Second_calculate() : calculate ()   // конструктор класса Second_calculate вызывает конструктор класса calculate
 //{};
-void summ_second() //метод вычисляет сумму чисел a и b
-{
-	summ1=summ();
-}
-double minus_second() //метод вычисляет разность чисел a и b
-{
-	return minus();
-}
-double umnogit_second() //метод вычисляет произведение чисел a и b
-{
-	return umnogit();
-}
-double delity_second() //метод вычисляет деление числа a на b
-{
-	return delity();
-} 
-};
+//void summ_second() //метод вычисляет сумму чисел a и b
+//{
+//	summ();
+//}
+//void minus_second() //метод вычисляет разность чисел a и b
+//{
+//	minus();
+//}
+//double umnogit_second() //метод вычисляет произведение чисел a и b
+//{
+//	return umnogit();
+//}
+//double delity_second() //метод вычисляет деление числа a на b
+//{
+//	return delity();
+//} 
+//};
 
 void main()
 {
@@ -91,7 +91,7 @@ void main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 calculate *calculate_ptr=new calculate();  // создаем объект класса calculate
-Second_calculate * Second_calculate_ptr=new Second_calculate(); // создаем объект производного класса Second_calculate от класса calculate
+//Second_calculate * Second_calculate_ptr=new Second_calculate(); // создаем объект производного класса Second_calculate от класса calculate
 cout<<"Введите число а:";
 float a;
 cin>>a;
@@ -105,23 +105,23 @@ cin>>znak;
 switch(znak) //в зависимости от введенного символа выполняем арифметическое действие
 {
 	case '+':
-		Second_calculate_ptr->summ_second();
-		cout<<"a+b="<<Second_calculate_ptr->summ1<<endl; 
+		//Second_calculate_ptr->summ_second();
+		//Second_calculate_ptr->summ_second(); 
 	//т к не метод summ() находится в разделе protected класса calculate,
 	// то мы получае доступ к нему через производный класс Second_calculate через метод summ_second()
 	break;
 	case '-':
-	cout<<"a-b="<<Second_calculate_ptr->minus_second()<<endl; 
+	//Second_calculate_ptr->minus_second(); 
 	//т к не метод summ() находится в разделе protected класса calculate,
 	// то мы получае доступ к нему через производный класс Second_calculate через метод summ_second()
 	break;
 	case '*':
-	cout<<"a*b="<<Second_calculate_ptr->umnogit_second()<<endl; 
+	//cout<<"a*b="<<Second_calculate_ptr->umnogit_second()<<endl; 
 	//т к не метод summ() находится в разделе protected класса calculate,
 	// то мы получае доступ к нему через производный класс Second_calculate через метод summ_second()
 	break;
 	case '/':
-	cout<<"a/b="<<Second_calculate_ptr->delity_second()<<endl; 
+	//cout<<"a/b="<<Second_calculate_ptr->delity_second()<<endl; 
 	//т к не метод summ() находится в разделе protected класса calculate,
 	// то мы получае доступ к нему через производный класс Second_calculate через метод summ_second()
 	
@@ -130,8 +130,8 @@ switch(znak) //в зависимости от введенного символ�
 	break;
 	default: cout<<"Введен не правильный символ арифметического действия"<<endl;
 }
-delete calculate_ptr; // удаляем объект 
-delete Second_calculate_ptr;
+//delete calculate_ptr; // удаляем объект 
+//delete Second_calculate_ptr;
 system("pause"); // команда задержки  экрана
 }
 
