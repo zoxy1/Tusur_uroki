@@ -14,43 +14,46 @@ class calculate
 public: // После объявления public следуют данные и функции(методы), доступные внешним для класса функциям.
 calculate() // конструктор
 {
-	cout<<"Вызван конструктор"<<endl;
 }
 ~calculate() // деструктор
 {
-	cout<<"Вызван деструктор"<<endl;
 }
 
 
-int summ() //метод вычисляет сумму чисел a и b
+double summ() //метод вычисляет сумму чисел a и b
 {
 	return a+b;
 }
-int minus() //метод вычисляет разность чисел a и b
+double minus() //метод вычисляет разность чисел a и b
 {
 	return a-b;
 }
-int umnogit() //метод вычисляет произведение чисел a и b
+double umnogit() //метод вычисляет произведение чисел a и b
 {
 	return a*b;
 }
-int delity() //метод вычисляет деление числа a на b
+double delity() //метод вычисляет деление числа a на b
 {
-	return a/b;
+	if(b==0)
+	{
+		cout<<"Ошибка деление на ноль"<<endl;
+		return 0;
+	}
+	else
+	{
+		return a/b;
+	}
 }
-void set_a(int a1) // метод 
+void set_ab(float a1,float b1) //метод записывает в недоступные из вне класса переменные a и b
 {
 	a=a1;
-}
-void set_b(int b1)
-{
 	b=b1;
 }
 
-private: // После объявления private следуют данные и функции(методы), не доступные внешним для класса функциям,
+private: // После объявления private следуют данные и функции(методы), не доступны внешним для класса функциям,
 		 // но они доступны для методов находящихся внутри класса
-int a; 
-int b; 
+float a; 
+float b; 
 };
 
 void main()
@@ -60,15 +63,37 @@ void main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 
-car *car_ptr=new car(); // при создании объекта вызывается конструктор, выводится сообщение "Вызван конструктор" 
-system("pause"); // команда задержки  экрана
-car_ptr->set_mark("Toyota corolla"); // заполняем данные класса car с помощью методов
-car_ptr->set_power(150);
-car_ptr->set_cost(600000);
+calculate *calculate_ptr=new calculate();  // создаем объект класса calculate
 
-cout<<car_ptr->get_mark()<<" "<<car_ptr->get_power()<<" л.с. "<<car_ptr->get_cost()<<"р"<<endl; // выводим данные объекта c помощью методов класса
+cout<<"Введите число а:";
+float a;
+cin>>a;
+cout<<"Введите число b:";
+float b;
+cin>>b;
+calculate_ptr->set_ab(a,b); // заполняем переменные класса a и b
+cout<<"Введите арифметическое действие + или - или * или / :";
+char znak;
+cin>>znak;
 
-delete car_ptr; // при удалении объекта вызывается деструктор, выводится сообщение "Вызван деструктор" 
+switch(znak) //в зависимости от введенного символа выполняем арифметическое действие
+{
+	case '+':
+	cout<<"a+b="<<calculate_ptr->summ()<<endl;
+	break;
+	case '-':
+	cout<<"a-b="<<calculate_ptr->minus()<<endl;
+	break;
+	case '*':
+	cout<<"a*b="<<calculate_ptr->umnogit()<<endl;
+	break;
+	case '/':
+	cout<<"a/b="<<calculate_ptr->delity()<<endl;
+	break;
+	default: cout<<"Введен не правильный символ арифметического действия"<<endl;
+
+}
+delete calculate_ptr; // удаляем объект 
 system("pause"); // команда задержки  экрана
 }
 
