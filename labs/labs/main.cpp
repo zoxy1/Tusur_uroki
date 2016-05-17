@@ -7,8 +7,6 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include <iomanip> //необходима для setw() задание ширины поля вывода данных 
-
 using namespace std;
 
 class calculate
@@ -23,13 +21,6 @@ void set_ab(float a1,float b1) //метод записывает в недост
 	a=a1;
 	b=b1;
 }
-
-private: // После объявления private следуют данные и функции(методы), не доступны внешним для класса функциям,
-		 // но они доступны для методов находящихся внутри класса
-float a; 
-float b; 
-// при помещении методов в раздел private класса, эти методы будут не доступны вне класса 
-//и мы их использовать в основной программе не сможем 
 double summ() //метод вычисляет сумму чисел a и b
 {
 	return a+b;
@@ -38,10 +29,17 @@ double minus() //метод вычисляет разность чисел a и 
 {
 	return a-b;
 }
+private: // После объявления private следуют данные и функции(методы), не доступны внешним для класса функциям,
+		 // но они доступны для методов находящихся внутри класса
+float a; 
+float b; 
+// при помещении методов в раздел private класса, эти методы будут не доступны вне класса 
+//и мы их использовать в основной программе не сможем 
 double umnogit() //метод вычисляет произведение чисел a и b
 {
 	return a*b;
 }
+protected:
 double delity() //метод вычисляет деление числа a на b
 {
 	if(b==0)
@@ -76,16 +74,16 @@ cin>>znak;
 switch(znak) //в зависимости от введенного символа выполняем арифметическое действие
 {
 	case '+':
-	cout<<"a+b="<<calculate_ptr->summ()<<endl; //выдаст ошибку, т к не метод summ() находится в разделе private класса
+	cout<<"a+b="<<calculate_ptr->summ()<<endl; 
 	break;
 	case '-':
-	cout<<"a-b="<<calculate_ptr->minus()<<endl; //выдаст ошибку, т к не метод minus() находится в разделе private класса
+	cout<<"a-b="<<calculate_ptr->minus()<<endl; 
 	break;
 	case '*':
 	cout<<"a*b="<<calculate_ptr->umnogit()<<endl; //выдаст ошибку, т к не метод umnogit() находится в разделе private класса
 	break;
 	case '/':
-	cout<<"a/b="<<calculate_ptr->delity()<<endl; //выдаст ошибку, т к не метод delity() находится в разделе private класса
+	cout<<"a/b="<<calculate_ptr->delity()<<endl; //выдаст ошибку, т к не метод delity() находится в разделе protected класса
 	break;
 	default: cout<<"Введен не правильный символ арифметического действия"<<endl;
 }
