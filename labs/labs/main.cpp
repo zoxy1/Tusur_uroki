@@ -1,60 +1,51 @@
-﻿// lab10_2
-/* Написать программу, в которой присутствуют методы для определенного пользователем класса. 
-Выполнить исследование вызова методов при выполнении арифметических операторов.
+﻿// lab11_1
+/* Разработать программу с использованием наследования классов, 
+реализующую классы: графический объект; круг; квадрат.
 */
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include <iomanip> //необходима для setw() задание ширины поля вывода данных 
+//#include <iomanip> //необходима для setw() задание ширины поля вывода данных 
 
 using namespace std;
 
-class calculate
+class graph_object
 {
 public: // После объявления public следуют данные и функции(методы), доступные внешним для класса функциям.
-calculate() // конструктор
+graph_object() // конструктор
 {
+
 }
-~calculate() // деструктор
+~graph_object() // деструктор
 {
 }
 
-
-double summ() //метод вычисляет сумму чисел a и b
+void set_color(int color1)
 {
-	return a+b;
+	color=color1;
 }
-double minus() //метод вычисляет разность чисел a и b
+void set_width_line(int width_line1)
 {
-	return a-b;
-}
-double umnogit() //метод вычисляет произведение чисел a и b
-{
-	return a*b;
-}
-double delity() //метод вычисляет деление числа a на b
-{
-	if(b==0)
-	{
-		cout<<"Ошибка деление на ноль"<<endl;
-		return 0;
-	}
-	else
-	{
-		return a/b;
-	}
-}
-void set_ab(float a1,float b1) //метод записывает в недоступные из вне класса переменные a и b
-{
-	a=a1;
-	b=b1;
+	width_line=width_line1;
 }
 
-private: // После объявления private следуют данные и функции(методы), не доступны внешним для класса функциям,
+protected: // После объявления private следуют данные и функции(методы), не доступны внешним для класса функциям,
 		 // но они доступны для методов находящихся внутри класса
-float a; 
-float b; 
+int color; 
+float width_line; 
 };
+
+class krug: public graph_object
+{
+void show(int radius)
+{
+
+}
+
+ 
+};
+
+
 
 void main()
 {
@@ -63,37 +54,19 @@ void main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 
-calculate *calculate_ptr=new calculate();  // создаем объект класса calculate
-
-cout<<"Введите число а:";
-float a;
-cin>>a;
-cout<<"Введите число b:";
-float b;
-cin>>b;
-calculate_ptr->set_ab(a,b); // заполняем переменные класса a и b
-cout<<"Введите арифметическое действие + или - или * или / :";
-char znak;
-cin>>znak;
-
-switch(znak) //в зависимости от введенного символа выполняем арифметическое действие
-{
-	case '+':
-	cout<<"a+b="<<calculate_ptr->summ()<<endl;
-	break;
-	case '-':
-	cout<<"a-b="<<calculate_ptr->minus()<<endl;
-	break;
-	case '*':
-	cout<<"a*b="<<calculate_ptr->umnogit()<<endl;
-	break;
-	case '/':
-	cout<<"a/b="<<calculate_ptr->delity()<<endl;
-	break;
-	default: cout<<"Введен не правильный символ арифметического действия"<<endl;
-
-}
-delete calculate_ptr; // удаляем объект 
+//calculate *calculate_ptr=new calculate();  // создаем объект класса calculate
+//HDC hDC=GetDC(NULL);
+//    HBRUSH hBrush=(HBRUSH)GetStockObject(WHITE_BRUSH);
+//    HPEN hPen=(HPEN)GetStockObject(WHITE_PEN);
+//    HBRUSH hOldBrush=(HBRUSH)SelectObject(hDC,hBrush);
+//    HPEN hOldPen=(HPEN)SelectObject(hDC,hPen);
+//    Ellipse(hDC,10,10,100,100);
+//    SelectObject(hDC,hOldBrush);
+//    SelectObject(hDC,hOldPen);
+//    ReleaseDC(NULL,hDC);
+ Canvas->Brush->Color=RGB(random(255),random(255),random(255));
+          Canvas->Rectangle(x,y,x+50,y+50);
+//delete calculate_ptr; // удаляем объект 
 system("pause"); // команда задержки  экрана
 }
 
