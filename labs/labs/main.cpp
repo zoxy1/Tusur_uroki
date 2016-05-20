@@ -5,46 +5,44 @@
 
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-//#include <iomanip> //необходима для setw() задание ширины поля вывода данных 
-
 using namespace std;
 
-class graph_object
+class graph_object // описываем графический объект
 {
 public: // После объявления public следуют данные и функции(методы), доступные внешним для класса функциям.
 graph_object() // конструктор
-{
-
-}
+{}
 ~graph_object() // деструктор
-{
-}
-
-void set_color(int color1)
+{}
+public:
+void set_color(int color1) // метод устанавливает цвет графического объекта
 {
 	color=color1;
 }
-void set_width_line(int width_line1)
+int get_color() // метод с помощью которого можно получить цвет графического объекта
 {
-	width_line=width_line1;
+	return color;
 }
-
-protected: // После объявления private следуют данные и функции(методы), не доступны внешним для класса функциям,
-		 // но они доступны для методов находящихся внутри класса
-int color; 
-float width_line; 
+private: 
+int color; // цвет графического объекта, доступен только внутри класса graph_object
 };
 
-class krug: public graph_object
+class krug: public graph_object // создаем класс krug наследник от базового класса graph_object
 {
-void show(int radius)
-{
-
-}
-
- 
+public:
+	void show(int radius) // метод вывода названия графического объекта, его цвета и радиус
+	{
+		cout<<"Круг "<<graph_object::get_color()<<" цвета, радиус "<<radius<<" см"<<endl;
+	}
 };
-
+class kvadrat: public graph_object // создаем класс kvadrat наследник от базового класса graph_object
+{
+public:
+	void show(int storona) // метод вывода названия графического объекта, его цвета и размер стороны
+	{
+		cout<<"Круг "<<graph_object::get_color()<<" цвета, радиус "<<storona<<" см"<<endl;
+	}
+};
 
 
 void main()
@@ -53,20 +51,12 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-
-//calculate *calculate_ptr=new calculate();  // создаем объект класса calculate
-//HDC hDC=GetDC(NULL);
-//    HBRUSH hBrush=(HBRUSH)GetStockObject(WHITE_BRUSH);
-//    HPEN hPen=(HPEN)GetStockObject(WHITE_PEN);
-//    HBRUSH hOldBrush=(HBRUSH)SelectObject(hDC,hBrush);
-//    HPEN hOldPen=(HPEN)SelectObject(hDC,hPen);
-//    Ellipse(hDC,10,10,100,100);
-//    SelectObject(hDC,hOldBrush);
-//    SelectObject(hDC,hOldPen);
-//    ReleaseDC(NULL,hDC);
- Canvas->Brush->Color=RGB(random(255),random(255),random(255));
-          Canvas->Rectangle(x,y,x+50,y+50);
-//delete calculate_ptr; // удаляем объект 
-system("pause"); // команда задержки  экрана
+	krug * krug_ptr=new krug();
+	kvadrat * kvadrat_ptr=new kvadrat();
+	krug_ptr->set_color(1);
+	krug_ptr->show(20);
+	kvadrat_ptr->set_color(2);
+	kvadrat_ptr->show(50);
+	system("pause"); // команда задержки  экрана
 }
 
