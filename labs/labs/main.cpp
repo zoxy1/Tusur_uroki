@@ -1,48 +1,56 @@
-﻿// lab11_1
-/* Разработать программу с использованием наследования классов, 
-реализующую классы: графический объект; круг; квадрат.
+﻿// lab11_2
+/* Написать программу, в которой описана иерархия классов: 
+функция от одной переменной (SIN(X), COS(X), TG(X)). 
+Базовый класс должен иметь методы получения значения функции 
+для данного значения переменной вводимой пользователем с экрана, 
+а также создания экземпляра класса, представляющего собой производную текущего экземпляра.
 */
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
+#include<math.h>
+#define PI  3.14159265358979323846
 using namespace std;
 
-class graph_object // описываем графический объект
+class X // описываем базовый класс
 {
-	public: // После объявления public следуют данные и функции(методы), доступные внешним для класса функциям.
-	graph_object() // конструктор
+public: // После объявления public следуют данные и функции(методы), доступные внешним для класса функциям.
+	X() // конструктор
 	{}
-	~graph_object() // деструктор
+	~X() // деструктор
 	{}
 	public:
-	void set_color(char *color1) // метод устанавливает цвет графического объекта
+	virtual float function_x(int x1) 
 	{
-		strcpy(color,color1); 
-	}
-	char * get_color() // метод с помощью которого можно получить цвет графического объекта
-	{
-		return color;
-	}
-	private: 
-	char color[10]; // цвет графического объекта, доступен только внутри класса graph_object
+		return 0;
+	};  
 };
-
-class krug: public graph_object // создаем класс krug наследник от базового класса graph_object
+class sin_X : public X
 {
-	public:
-	void show(int radius) // метод вывода названия графического объекта, его цвета и радиус
+public:
+	float function_x(int x1)
 	{
-		cout<<"Круг "<<graph_object::get_color()<<" цвета, радиус "<<radius<<" см"<<endl;
+		return sin(x1 * PI / 180); 
 	}
-};
-class kvadrat: public graph_object // создаем класс kvadrat наследник от базового класса graph_object
-{
-	public:
-	void show(int storona) // метод вывода названия графического объекта, его цвета и размер стороны
-	{
-		cout<<"Круг "<<graph_object::get_color()<<" цвета, радиус "<<storona<<" см"<<endl;
-	}
-};
 
+};
+class cos_X : public X
+{
+public:
+	float function_x(int x1)
+	{
+		return cos(x1 * PI / 180); 
+	}
+
+};
+class tan_X : public X
+{
+public:
+	float function_x(int x1)
+	{
+	return tan(x1 * PI / 180); 
+	}
+
+};
 void main()
 {
 	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
@@ -50,12 +58,15 @@ void main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 	
-	krug * krug_ptr=new krug(); //создаем объект класса krug
-	kvadrat * kvadrat_ptr=new kvadrat(); //создаем объект класса kvadrat
-	krug_ptr->set_color("зеленого"); // устанавливаем цвет грфического объекта, используем метод set_color() базового класса graph_object
-	krug_ptr->show(20); // выводим названия графического объекта, его цвета и радиус с помощью метода show()
-	kvadrat_ptr->set_color("желтого"); // устанавливаем цвет грфического объекта, используем метод set_color() базового класса graph_object
-	kvadrat_ptr->show(50); // выводим названия графического объекта, его цвета и размер стороны с помощью метода show()
+	sin_X * sin_X_ptr=new sin_X();
+	cos_X * cos_X_ptr=new cos_X();
+	tan_X * tan_X_ptr=new tan_X();
+	cout<<"Введите значение х:";
+	int x_in;
+	cin>>x_in;
+	cout<<"sin("<<x_in<<")="<<sin_X_ptr->function_x(x_in)<<endl;
+	cout<<"cos("<<x_in<<")="<<cos_X_ptr->function_x(x_in)<<endl;
+	cout<<"tan("<<x_in<<")="<<tan_X_ptr->function_x(x_in)<<endl;
 	system("pause"); // команда задержки  экрана
 }
 
