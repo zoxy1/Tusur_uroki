@@ -18,92 +18,84 @@ public:
 	{}
 	~X() // деструктор
 	{}
-	protected:
-	virtual float function_x() // виртуальная 
+	
+	virtual float sin_x() // виртуальный метод sin_x()
 	{
 		return 0;
 	};  
-	public:
-	void set_x(float x1)
+	virtual float cos_x() // виртуальный метод cos_x()
+	{
+		return 0;
+	};  
+	virtual float tan_x() // виртуальный метод tan_x()
+	{
+		return 0;
+	};  
+	
+	void set_x(float x1) // метод записи значения в переменную x 
 	{
 	x=x1;
 	}
-	float get_x()
+	float get_x() // метод получения значения из переменной x 
 	{
 		return x;
 	}
 
 private:
-	float x; 
+	float x; // переменная не доступна вне класса X
 };
-class sin_X : public X
+
+class sin_X : public X // описываем производный от класса X класс sin_X 
 {
 public:
-	float function_x()
+	float sin_x() // метод возращающий значение синуса от числа х
 	{
-		return sin((get_x() * PI)/180); 
+		int temp=get_x();
+		if(temp==180||temp==360) //если углы равны 180 или 360 градусов возращаем 0 
+		{
+			return 0;
+		}
+		else
+		{
+			return sin((get_x() * PI)/180); // вычисляем значение синуса
+		}	
+	
 	}
 
 };
 class cos_X : public X
 {
 public:
-	float function_x()
+	float cos_x() // метод возращающий значение косинуса от числа х
 	{
 		float temp= get_x();
-		if(temp==90||temp==270)
+		if(temp==90||temp==270) //если углы равны 90 или 270 градусов возращаем 0 
 		{
 			return 0;
 		}
 		else
 		{ 
-			return cos((get_x() * PI)/180);  
+			return cos((get_x() * PI)/180);  // вычисляем значение косинуса
 		}	
 	}
-
 };
-class tan_X : public X
+class tan_X : public X, public sin_X,  public cos_X // описываем производный от классов X, sin_X,cos_X класс tan_X 
 {
 public:
-	float function_x()
+	float tan_x() // метод возращающий значение тангенса от числа х
 	{
-		int temp=get_x();
-		if(temp==90||temp==270)
+		float temp = cos_X::cos_x();
+		if(temp==0) //проверяем значение косинуса равно 0 или нет 
 		{
-			cout<<"Деление на ноль"<<endl;
+			cout<<"Значение тангенса неопределено"<<endl;
+			return 0;
 		}
-		else 
+		else
 		{
-			return tan((get_x() * PI)/180); 
-		}
+			return sin_X::sin_x()/temp;
+		
+		}	
 	}
-};
-class sin_X_rad : public sin_X
-{
-public:
-	float function_x()
-	{
-		return sin(get_x()); 
-	}
-
-};
-class cos_X_rad : public cos_X
-{
-public:
-	float function_x()
-	{
-		return cos(get_x()); 
-	}
-
-};
-class tan_X_rad : public tan_X
-{
-public:
-	float function_x()
-	{
-		return tan(get_x()); 
-	}
-
 };
 void main()
 {
@@ -112,30 +104,30 @@ void main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 	//X * X_ptr=new X();
-	sin_X * sin_X_ptr=new sin_X();
-	cos_X * cos_X_ptr=new cos_X();
-	tan_X * tan_X_ptr=new tan_X();
-	sin_X_rad *sin_X_rad_ptr=new sin_X_rad();
-	cos_X_rad *cos_X_rad_ptr=new cos_X_rad();
-	tan_X_rad *tan_X_rad_ptr=new tan_X_rad();
-	cout<<"Введите значение х:";
+	sin_X * sin_X_ptr=new sin_X(); // создаем оъект класса sin_X
+	cos_X * cos_X_ptr=new cos_X(); // создаем оъект класса cos_X
+	tan_X * tan_X_ptr=new tan_X(); // создаем оъект класса tan_X
+	cout<<"Введите значение х в градусах от 0 до 360:";
 	float x_in;
-	cin>>x_in;
+	cin>>x_in; // вводим значение числа х в градусах
 	
-	sin_X_ptr->set_x(x_in);
-	cout<<"sin("<<x_in<<"град.)="<<sin_X_ptr->function_x()<<endl;
-	sin_X_rad_ptr->set_x(x_in);
-	cout<<"sin("<<x_in<<"рад.)="<<sin_X_rad_ptr->function_x()<<endl;
+	sin_X_ptr->set_x(x_in); // передаем значение числа объекту класса sin_X находящемуся по адресу sin_X_ptr
+	cout<<"sin("<<x_in<<")="<<sin_X_ptr->sin_x()<<endl;
 	
 	cos_X_ptr->set_x(x_in);
-	cout<<"cos("<<x_in<<"град.)="<<cos_X_ptr->function_x()<<endl;
-	cos_X_rad_ptr->set_x(x_in);
-	cout<<"cos("<<x_in<<"рад.)="<<cos_X_rad_ptr->function_x()<<endl;
+	cout<<"cos("<<x_in<<")="<<cos_X_ptr->cos_x()<<endl;
+		
+	tan_X_ptr->sin_X::set_x(x_in);
+	tan_X_ptr->cos_X::set_x(x_in);
+	if(x_in==90||x_in==270)
+	{
+		cout<<"Значение тангенса неопределено"<<endl;
+	}
+	else
+	{
+		cout<<"tan("<<x_in<<")="<<tan_X_ptr->tan_x()<<endl;
+	}
 	
-	tan_X_ptr->set_x(x_in);
-	cout<<"tan("<<x_in<<"град.)="<<tan_X_ptr->function_x()<<endl;
-	tan_X_rad_ptr->set_x(x_in);
-	cout<<"tan("<<x_in<<"рад.)="<<tan_X_rad_ptr->function_x()<<endl;
 	system("pause"); // команда задержки  экрана
 }
 
