@@ -8,7 +8,7 @@
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 #include<math.h>
-#define PI  3.141592653589793238462643383279 // число пи
+#define PI  3.141592653589 // число Пи
 using namespace std;
 
 class X // описываем базовый класс
