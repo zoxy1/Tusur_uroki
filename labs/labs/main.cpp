@@ -51,12 +51,12 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	krug * krug_ptr=new krug();
-	kvadrat * kvadrat_ptr=new kvadrat();
-	krug_ptr->set_color(1);
-	krug_ptr->show(20);
-	kvadrat_ptr->set_color(2);
-	kvadrat_ptr->show(50);
+	krug * krug_ptr=new krug(); //создаем объект класса krug
+	kvadrat * kvadrat_ptr=new kvadrat(); //создаем объект класса kvadrat
+	krug_ptr->set_color(1); // устанавливаем цвет грфического объекта, используем метод set_color() базового класса graph_object
+	krug_ptr->show(20); // выводим названия графического объекта, его цвета и радиус с помощью метода show()
+	kvadrat_ptr->set_color(2); // устанавливаем цвет грфического объекта, используем метод set_color() базового класса graph_object
+	kvadrat_ptr->show(50); // выводим названия графического объекта, его цвета и размер стороны с помощью метода show()
 	system("pause"); // команда задержки  экрана
 }
 
