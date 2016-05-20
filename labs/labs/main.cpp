@@ -19,19 +19,6 @@ public:
 	~X() // деструктор
 	{}
 	
-	virtual float sin_x() // виртуальный метод sin_x()
-	{
-		return 0;
-	};  
-	virtual float cos_x() // виртуальный метод cos_x()
-	{
-		return 0;
-	};  
-	virtual float tan_x() // виртуальный метод tan_x()
-	{
-		return 0;
-	};  
-	
 	void set_x(float x1) // метод записи значения в переменную x 
 	{
 	x=x1;
@@ -48,7 +35,7 @@ private:
 class sin_X : public X // описываем производный от класса X класс sin_X 
 {
 public:
-	float sin_x() // метод возращающий значение синуса от числа х
+	float sin_x() // переопределяем метод возращающий значение синуса от числа х
 	{
 		int temp=get_x();
 		if(temp==180||temp==360) //если углы равны 180 или 360 градусов возращаем 0 
@@ -57,17 +44,15 @@ public:
 		}
 		else
 		{
-			return sin((get_x() * PI)/180); // вычисляем значение синуса
-		}	
-	
+			return sin((temp * PI)/180); // вычисляем значение синуса
+		}		
 	}
-
 };
 
 class cos_X : public X
 {
 public:
-	float cos_x() // метод возращающий значение косинуса от числа х
+	float cos_x() // переопределяем метод возращающий значение косинуса от числа х
 	{
 		float temp= get_x();
 		if(temp==90||temp==270) //если углы равны 90 или 270 градусов возращаем 0 
@@ -76,15 +61,15 @@ public:
 		}
 		else
 		{ 
-			return cos((get_x() * PI)/180);  // вычисляем значение косинуса
+			return cos((temp * PI)/180);  // вычисляем значение косинуса
 		}	
 	}
 };
 
-class tan_X : public X, public sin_X,  public cos_X // описываем производный от классов X, sin_X,cos_X класс tan_X 
+class tan_X : public sin_X,  public cos_X // описываем производный от классов sin_X,cos_X класс tan_X 
 {
 public:
-	float tan_x() // метод возращающий значение тангенса от числа х
+	float tan_x() // переопределяем метод возращающий значение тангенса от числа х
 	{
 		float temp = cos_X::cos_x();
 		if(temp==0) //проверяем значение косинуса равно 0 или нет 
