@@ -63,6 +63,7 @@ public:
 	}
 
 };
+
 class cos_X : public X
 {
 public:
@@ -79,6 +80,7 @@ public:
 		}	
 	}
 };
+
 class tan_X : public X, public sin_X,  public cos_X // описываем производный от классов X, sin_X,cos_X класс tan_X 
 {
 public:
@@ -93,7 +95,6 @@ public:
 		else
 		{
 			return sin_X::sin_x()/temp;
-		
 		}	
 	}
 };
@@ -103,7 +104,7 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-	//X * X_ptr=new X();
+	
 	sin_X * sin_X_ptr=new sin_X(); // создаем оъект класса sin_X
 	cos_X * cos_X_ptr=new cos_X(); // создаем оъект класса cos_X
 	tan_X * tan_X_ptr=new tan_X(); // создаем оъект класса tan_X
@@ -111,21 +112,21 @@ void main()
 	float x_in;
 	cin>>x_in; // вводим значение числа х в градусах
 	
-	sin_X_ptr->set_x(x_in); // передаем значение числа объекту класса sin_X находящемуся по адресу sin_X_ptr
-	cout<<"sin("<<x_in<<")="<<sin_X_ptr->sin_x()<<endl;
+	sin_X_ptr->set_x(x_in); // передаем значение градусов с помощью метода set_x() в объект на который указывает sin_X_ptr
+	cout<<"sin("<<x_in<<")="<<sin_X_ptr->sin_x()<<endl; // выводим значение синуса
 	
-	cos_X_ptr->set_x(x_in);
-	cout<<"cos("<<x_in<<")="<<cos_X_ptr->cos_x()<<endl;
+	cos_X_ptr->set_x(x_in);// передаем значение градусов с помощью метода set_x() в объект на который указывает cos_X_ptr
+	cout<<"cos("<<x_in<<")="<<cos_X_ptr->cos_x()<<endl; // выводим значение косинуса
 		
-	tan_X_ptr->sin_X::set_x(x_in);
-	tan_X_ptr->cos_X::set_x(x_in);
-	if(x_in==90||x_in==270)
+	tan_X_ptr->sin_X::set_x(x_in);// передаем значение градусов с помощью метода set_x() из класса sin_X в объект на который указывает tan_X_ptr
+	tan_X_ptr->cos_X::set_x(x_in); // передаем значение градусов с помощью метода set_x() из класса cos_X в объект на который указывает tan_X_ptr
+	if(x_in==90||x_in==270) // проверям угол в градусах если равен 90 или 270 выдаем, что значение тангенса не определено
 	{
 		cout<<"Значение тангенса неопределено"<<endl;
 	}
 	else
 	{
-		cout<<"tan("<<x_in<<")="<<tan_X_ptr->tan_x()<<endl;
+		cout<<"tan("<<x_in<<")="<<tan_X_ptr->tan_x()<<endl; // выводим значение тангенса
 	}
 	
 	system("pause"); // команда задержки  экрана
