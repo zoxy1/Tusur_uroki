@@ -7,12 +7,12 @@
 базового класса по ссылке и демонстрирующую виртуальный вызов.
 */
 #include <iostream> // содержит функции ввода вывода cin, cout
-
+#include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
 using namespace std;
 class in_out // описываем базовый абстрактный класс
 {
 public:
-   virtual int in() const = 0; // чисто виртуальная функция
+   virtual char* in() const = 0; // чисто виртуальная функция
    virtual void out(char *T) const = 0; // чисто виртуальная функция
 
 void set_text(char *txt)
@@ -35,9 +35,9 @@ public:
   {
   cout<<T<<endl;
   }
-   virtual int in() const // определяем виртуальную функцию area() для расчета площади квадрата
+   virtual char * in() const // определяем виртуальную функцию area() для расчета площади квадрата
 	{ 
-	int temp;
+	int *temp[20];
 		cout<<"Введите текст"<<endl;
 	cin>>temp;
 	return temp;
