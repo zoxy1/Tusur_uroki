@@ -8,42 +8,52 @@
 */
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
+#include<string.h>
 using namespace std;
 class in_out // описываем базовый абстрактный класс
 {
 public:
-   virtual char* in() const = 0; // чисто виртуальная функция
-   virtual void out(char *T) const = 0; // чисто виртуальная функция
-
-void set_text(char *txt)
+	in_out()
 	{
-	text=txt;
-	}
-char * get_text()
-{
-	return text;
-}
-
-private:
-char *text;
+	};
+	virtual void vivod()=0;
+	//virtual void set()=0;
+	//virtual void vvod() const=0;
+//char text_default[20];
+//int chislo_default;
 };
-class vivod_text: public in_out // описываем производный класс kvadrat от класса Figura
+class vivod_vvod_text: public in_out // описываем производный класс kvadrat от класса Figura
 {
 public:
-   vivod_text () {} //конструктор принимает значение стороны квадрата, и записывает его в x1 
-  virtual void out(char *T) const
-  {
-  cout<<T<<endl;
-  }
-   virtual char * in() const // определяем виртуальную функцию area() для расчета площади квадрата
-	{ 
-	int *temp[20];
-		cout<<"Введите текст"<<endl;
-	cin>>temp;
-	return temp;
-  }
-};
+ 
+	vivod_vvod_text(char *T)
+ {strcpy(text,T);}
+	
+	virtual void vivod() 
+ {
+ cout<<text<<endl;
+ }; 
 
+
+
+private:
+char text[20];
+};
+class vivod_vvod_chislo: public in_out // описываем производный класс kvadrat от класса Figura
+{
+public:
+	vivod_vvod_chislo(int chis)
+	{
+	chis1=chis;
+	}
+	virtual void vivod()
+ {
+ cout<<chis1<<endl;
+ }; 
+
+private:
+int chis1;
+};
 void main()
 {
 	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода
@@ -52,10 +62,28 @@ void main()
 	в свойствах консоли шрифт Lucida Console */
 
 
-	in_out *vivod1; // инициализируем указатель figura1 типа Figura
-	vivod1=new vivod_text();
-	vivod1->in();
-	vivod1->out("asdasd");
+	in_out *vivod_vvod1; 
+	in_out *vivod_vvod2; 
+	//vivod_vvod_base=
+	//vivod_vvod_text *vivod_vvod1;
+	vivod_vvod1=new vivod_vvod_text("Выводится строка");
+	
+	//vivod_vvod_chislo *vivod_vvod2;
+	vivod_vvod2=new vivod_vvod_chislo(127);
+	
+	//vivod_vvod1->set("Текст класса vivod_vvod_text");
+	vivod_vvod1->vivod();
+
+	//vivod_vvod2->set_chis(127);
+	cout<<"Выводим число:";
+	vivod_vvod2->vivod();
+	
+	
+	
+	
+	
+	//vivod1->in();
+	//vivod1->out("asdasd");
 	//figura1=new kvadrat (5); // создаем объект класса kvadrat и присваиваем указателю figura1 его адрес 
 	//Figura *figura2; // инициализируем указатель figura1 типа Figura
 	//figura2=new krug (5); // создаем объект класса krug и присваиваем указателю figura2 его адрес 
