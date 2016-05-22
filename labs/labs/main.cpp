@@ -17,42 +17,50 @@ public:
 	{
 	};
 	virtual void vivod()=0;
-	//virtual void set()=0;
-	//virtual void vvod() const=0;
-//char text_default[20];
-//int chislo_default;
+	virtual void vvod() =0;
+protected:
+char text_default[30];
+int chislo_default;
 };
 class vivod_vvod_text: public in_out // описываем производный класс kvadrat от класса Figura
 {
 public:
- 
-	vivod_vvod_text(char *T)
- {strcpy(text,T);}
 	
-	virtual void vivod() 
- {
- cout<<text<<endl;
- }; 
-
+void set_text(char * T)
+	{
+		strcpy(text,T);
+	}
+virtual void vivod() 
+	{
+		cout<<text_default<<endl;
+	}; 
+virtual void vvod() 
+	{
+		strcpy(text_default,text);
+	}
 
 
 private:
-char text[20];
+	char text[30];
 };
-class vivod_vvod_chislo: public in_out // описываем производный класс kvadrat от класса Figura
+class vivod_vvod_chislo: public in_out 
 {
 public:
-	vivod_vvod_chislo(int chis)
+	void set_chislo(int chis)
 	{
-	chis1=chis;
+		chis1=chis;
 	}
-	virtual void vivod()
- {
- cout<<chis1<<endl;
- }; 
 
+	virtual void vivod()
+	{
+		cout<<chislo_default<<endl;
+	}; 
+virtual void vvod() 
+	{
+		chislo_default=chis1;
+	}
 private:
-int chis1;
+	int chis1;
 };
 void main()
 {
@@ -62,32 +70,23 @@ void main()
 	в свойствах консоли шрифт Lucida Console */
 
 
-	in_out *vivod_vvod1; 
-	in_out *vivod_vvod2; 
-	//vivod_vvod_base=
-	//vivod_vvod_text *vivod_vvod1;
-	vivod_vvod1=new vivod_vvod_text("Выводится строка");
+	in_out *vivod_vvod_ptr1; 
+	in_out *vivod_vvod_ptr2; 
+	vivod_vvod_text *vivod_vvod_text_ptr;
+	vivod_vvod_chislo *vivod_vvod_chislo_ptr;
 	
-	//vivod_vvod_chislo *vivod_vvod2;
-	vivod_vvod2=new vivod_vvod_chislo(127);
+	vivod_vvod_ptr1=new vivod_vvod_text();
+	vivod_vvod_text_ptr->set_text("Записанный текст");
 	
-	//vivod_vvod1->set("Текст класса vivod_vvod_text");
-	vivod_vvod1->vivod();
+	
+	vivod_vvod_ptr2=new vivod_vvod_chislo();
+	vivod_vvod_chislo_ptr->set_chislo(127);
 
-	//vivod_vvod2->set_chis(127);
-	cout<<"Выводим число:";
-	vivod_vvod2->vivod();
+	vivod_vvod_ptr1->vvod();
+	vivod_vvod_ptr2->vvod();
 	
+	vivod_vvod_ptr1->vivod();
+	vivod_vvod_ptr2->vivod();
 	
-	
-	
-	
-	//vivod1->in();
-	//vivod1->out("asdasd");
-	//figura1=new kvadrat (5); // создаем объект класса kvadrat и присваиваем указателю figura1 его адрес 
-	//Figura *figura2; // инициализируем указатель figura1 типа Figura
-	//figura2=new krug (5); // создаем объект класса krug и присваиваем указателю figura2 его адрес 
-	//cout<<figura1->area()<<endl; //выводим возращаемое функцией area() значение площади квадрата
-	//cout<<figura2->area()<<endl; //выводим возращаемое функцией area() значение площади круга
 	system("pause"); // команда задержки  экрана
 }
