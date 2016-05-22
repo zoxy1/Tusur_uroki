@@ -4,9 +4,9 @@
 */
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#define PI 3.1415926535
+#define PI 3.1415926535 
 using namespace std;
-class Figure // описываем базовый абстрактный класс
+class Figure // описываем базовый абстрактный класс Figure
 {
 public:
 	virtual double area()=0; // виртуальная функция вычисления площади
@@ -54,28 +54,31 @@ private:
 class Trapezium_: public Figure//Описываем производный класс Trapezium_ от базового класса Figure 
 {
 public:
-Trapezium_(float a,float b, float h,float C1_in,float C2_in)// конструктор принимает параметры трапеции
+Trapezium_(float a,float b, float h,float L1_in,float L2_in)// конструктор принимает параметры трапеции верхняя, нижняя стороны, высота и два нижних угла 
 	{
 	a1=a;
 	b1=b;
 	h1=h;
-	C1=C1_in;
-	C2=C2_in;
+	L1=L1_in;
+	L2=L2_in;
 	};
 virtual double area()// определяем функцию вычисления площади для трапеции
 	{
 	return ((a1+b1)/2)*h1;
 	}
-virtual float perimeter()// определяем функцию вычисления периметра для круга
+virtual float perimeter()// определяем функцию вычисления периметра для трапеции
 	{
-		return a1+b1+C1+C2;
+		float temp;
+		temp=a1+b1+h1*(1/sin(L1*PI/180)+1/sin(L2*PI/180));
+		return temp;
+	
 	}
 private:
 	float a1; // приватные переменные, хранят параметры трапеции
 	float b1;
 	float h1;
-	float C1;
-	float C2;
+	float L1;
+	float L2;
 };
 
 void main()
@@ -85,7 +88,7 @@ void main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 
-	Figure *Figure1;//создаем указатели типа класса Figure
+	Figure *Figure1;//создаем указатели, имеющие тип класса Figure
 	Figure *Figure2;
 	Figure *Figure3;
 	
@@ -97,7 +100,7 @@ void main()
 	cout<<"Площадь круга равна:"<<Figure2->area()<<endl;// выводим площадь круга
 	cout<<"Периметр круга равен:"<<Figure2->perimeter()<<endl;// выводим периметр(длинну окружности) круга
 		
-	Figure3=new Trapezium_(10,20,5,45,45);// создаем объект типа Trapezium_ и присваеваем его адрес указатею Figure3
+	Figure3=new Trapezium_(10,20,10,90,90);// создаем объект типа Trapezium_ и присваеваем его адрес указатею Figure3
 	cout<<"Площадь трапеции равна:"<<Figure3->area()<<endl;// выводим площадь трапеции
 	cout<<"Периметр трапеции равен:"<<Figure3->perimeter()<<endl;// выводим периметр трапеции
 	system("pause"); // команда задержки  экрана
