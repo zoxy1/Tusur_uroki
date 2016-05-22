@@ -4,32 +4,27 @@
 */
 #include <iostream> // содержит функции ввода вывода cin, cout
 #include<windows.h> //содержит функции SetConsoleCP(), SetConsoleOutputCP()
-#include<math.h>
-
 #define PI 3,1415926535
 using namespace std;
 class Figure // описываем базовый абстрактный класс
 {
 public:
-	Figure()
-	{};
-	virtual float area()=0;
-	virtual float perimeter() =0;
-
+	virtual float area()=0; // виртуальная функция вычисления площади
+	virtual float perimeter()=0; // виртуальная функция вычисления периметра
 };
-class Rectangle: public Figure // описываем производный класс kvadrat от класса Figura
+class Rectangle_: public Figure //Описываем производный класс Rectangle_ от класса Figure 
 {
 public:
-	Rectangle(int x,int y)
+	Rectangle_(int x,int y) // конструктор принимает значения сторон прямоугольника
 	{
-		x1=x;
+		x1=x; // сохраняем значения сторон в приватные переменные класа x1,y1
 		y1=y;
-	};
-virtual float area()
+	}
+virtual float area() // определяем функцию вычисления площади для прямоугольника
 	{
 	return x1*y1;
 	}
-virtual float perimeter()
+virtual float perimeter() // определяем функцию вычисления периметра для прямоугольника
 	{
 		return 2*(x1+y1);
 	}
@@ -38,10 +33,10 @@ private:
 	int y1;
 
 };
-class Circle: public Figure 
+class Circle_: public Figure 
 {
 public:
-	Circle(int r)
+	Circle_(int r)
 	{
 		r1=r;
 	}
@@ -56,16 +51,16 @@ virtual float perimeter()
 private:
 	int r1;
 };
-class Trapezium: public Figure
+class Trapezium_: public Figure
 {
 public:
-Trapezium(int a,int b, int h,int L1_in,int L2_in)
+Trapezium_(int a,int b, int h,int C1_in,int C2_in)
 	{
 	a1=a;
 	b1=b;
 	h1=h;
-	L1=L1_in;
-	L2=L2_in;
+	C1=C1_in;
+	C2=C2_in;
 	};
 virtual float area()
 	{
@@ -73,17 +68,15 @@ virtual float area()
 	}
 virtual float perimeter()
 	{
-		return a1+b1+h1*(1/sin((L1* PI / 180))+1/sin((L2* PI / 180)));
+		return a1+b1+C1+C2;
 	}
-
 private:
 	int a1;
 	int b1;
 	int h1;
-	int L1;
-	int L2;
+	int C1;
+	int C2;
 };
-
 
 void main()
 {
@@ -92,24 +85,19 @@ void main()
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
 
-
-	/*in_out *vivod_vvod_ptr1; 
-	in_out *vivod_vvod_ptr2; 
-	vivod_vvod_text *vivod_vvod_text_ptr;
-	vivod_vvod_chislo *vivod_vvod_chislo_ptr;
+	Figure *Figure1;
+	Figure1=new Rectangle_(10,20);
+	cout<<"Площадь прямоугольника равна:"<<Figure1->area()<<endl;
+	cout<<"Периметр прямоугольника равен:"<<Figure1->perimeter()<<endl;
 	
-	vivod_vvod_ptr1=new vivod_vvod_text();
-	vivod_vvod_text_ptr->set_text("Записанный текст");
+	Figure *Figure2;
+	Figure2=new Circle_(10);
+	cout<<"Площадь круга равна:"<<Figure2->area()<<endl;
+	cout<<"Периметр круга равен:"<<Figure2->perimeter()<<endl;
 	
-	
-	vivod_vvod_ptr2=new vivod_vvod_chislo();
-	vivod_vvod_chislo_ptr->set_chislo(127);
-
-	vivod_vvod_ptr1->vvod();
-	vivod_vvod_ptr2->vvod();
-	
-	vivod_vvod_ptr1->vivod();
-	vivod_vvod_ptr2->vivod();*/
-	
+	Figure *Figure3;
+	Figure3=new Trapezium_(10,20,5,45,45);
+	cout<<"Площадь трапеции равна:"<<Figure3->area()<<endl;
+	cout<<"Периметр трапеции равен:"<<Figure3->perimeter()<<endl;
 	system("pause"); // команда задержки  экрана
 }
