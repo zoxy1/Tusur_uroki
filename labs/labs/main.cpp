@@ -12,20 +12,51 @@ using namespace std;
 class Person // описываем базовый абстрактный класс
 {
 public:
+Person(char *T, int year_in)
+	{
+	strcpy(pol,T);	
+	year=year_in;
+	}
+virtual void vivod()=0;	
 char pol[10];
 int year;
 };
 class School: public Person //Описываем производный класс School от базового класса Person 
 {
 public:
+School(int number_School_in,int class_School_in,int number_gurnal_in,float otcenka_in,char *T, int year_in) :Person(T,year_in)
+{
+	number_School=number_School_in;
+	class_School=class_School_in;
+	number_gurnal=number_gurnal_in;
+	otcenka=otcenka_in;
+}
+virtual void vivod()
+	{
+	cout<<"Школьник учится в школе №"<<number_School<<" в "<<class_School;
+	cout<<" классе, номер в журнале "<<number_gurnal<<", средняя оценка "<<otcenka<<","<<endl;
+	cout<<"пол "<<pol<<", возраст "<<year<<" лет."<<endl;
+	}
 int number_School;
 int class_School;
-int number;
+int number_gurnal;
 float otcenka;
 };
-class Student: public School //Описываем производный класс Student от базового класса Figure 
+class Student: public School //Описываем производный класс Student от базового класса School 
 {
 public:
+Student(char *vuz_in,char *department_in,char *group_in,int number_gurnal_in,float otcenka_in,char *Ts, int year_ins) :School(0,0,number_gurnal_in,otcenka_in,Ts, year_ins)
+	{
+		strcpy(vuz,vuz_in);	
+		strcpy(department,department_in);	
+		strcpy(group,group_in);	
+	}
+virtual void vivod()
+	{
+		cout<<"Студент учится в вузе "<<vuz<<" на "<<department<<" факультете, группа "<<group<<", номер в журнале "<<number_gurnal<<","<<endl;
+		cout<<"средняя оценка "<<otcenka;	
+		cout<<", пол "<<pol<<", возраст "<<year<<" лет."<<endl;
+	}
 char vuz[30];	
 char department[30];
 char group[30];
@@ -38,21 +69,11 @@ void main()
     SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода
 	/* Для правильного отображения русских символов в консоли нужно выбрать 
 	в свойствах консоли шрифт Lucida Console */
-
-	Figure *Figure1;//создаем указатели типа класса Figure
-	Figure *Figure2;
-	Figure *Figure3;
-	
-	Figure1=new Rectangle_(10,20); // создаем объект типа Rectangle_ и присваеваем его адрес указатею Figure1
-	cout<<"Площадь прямоугольника равна:"<<Figure1->area()<<endl;// выводим площадь прямоугольника
-	cout<<"Периметр прямоугольника равен:"<<Figure1->perimeter()<<endl;// выводим периметр прямоугольника
-	
-	Figure2=new Circle_(5);// создаем объект типа Circle_ и присваеваем его адрес указатею Figure2
-	cout<<"Площадь круга равна:"<<Figure2->area()<<endl;// выводим площадь круга
-	cout<<"Периметр круга равен:"<<Figure2->perimeter()<<endl;// выводим периметр(длинну окружности) круга
-		
-	Figure3=new Trapezium_(10,20,5,45,45);// создаем объект типа Trapezium_ и присваеваем его адрес указатею Figure3
-	cout<<"Площадь трапеции равна:"<<Figure3->area()<<endl;// выводим площадь трапеции
-	cout<<"Периметр трапеции равен:"<<Figure3->perimeter()<<endl;// выводим периметр трапеции
+	Person *Person1;
+	Person *Person2;
+	Person1=new School(53,3,1,4.8,"мужской",10);
+	Person2=new Student("ТУСУР","РТФ","127", 5,4.9,"мужской", 20);
+	Person1->vivod();
+	Person2->vivod();
 	system("pause"); // команда задержки  экрана
 }
