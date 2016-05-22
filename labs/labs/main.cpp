@@ -12,74 +12,25 @@ using namespace std;
 class Person // описываем базовый абстрактный класс
 {
 public:
-	virtual double area()=0; // виртуальная функция вычисления площади
-	virtual float perimeter()=0; // виртуальная функция вычисления периметра
+char pol[10];
+int year;
 };
-class Rectangle_: public Figure //Описываем производный класс Rectangle_ от базового класса Figure 
+class School: public Person //Описываем производный класс School от базового класса Person 
 {
 public:
-	Rectangle_(float x,float y) // конструктор принимает значения сторон прямоугольника
-	{
-		x1=x; // сохраняем значения сторон в приватные переменные класа x1,y1
-		y1=y;
-	}
-virtual double area() // определяем функцию вычисления площади для прямоугольника
-	{
-	return x1*y1;
-	}
-virtual float perimeter() // определяем функцию вычисления периметра для прямоугольника
-	{
-		return 2*(x1+y1);
-	}
-private:
-	float x1; // приватные переменные, хранят стороны прямоугольника
-	float y1;
+int number_School;
+int class_School;
+int number;
+float otcenka;
+};
+class Student: public School //Описываем производный класс Student от базового класса Figure 
+{
+public:
+char vuz[30];	
+char department[30];
+char group[30];
+};
 
-};
-class Circle_: public Figure //Описываем производный класс Circle_ от базового класса Figure 
-{
-public:
-	Circle_(float r)// конструктор принимает значение радиуса круга
-	{
-		r1=r; // сохраняем значения радиуса в приватную переменную класа r1
-	}
-virtual double area()// определяем функцию вычисления площади для круга
-	{
-		return PI*r1*r1;
-	}
-virtual float perimeter()// определяем функцию вычисления периметра для круга
-	{
-		return 2*PI*r1;
-	}
-private:
-	float r1;// приватная переменная, хранит радиус окружности
-};
-class Trapezium_: public Figure//Описываем производный класс Trapezium_ от базового класса Figure 
-{
-public:
-Trapezium_(float a,float b, float h,float C1_in,float C2_in)// конструктор принимает параметры трапеции
-	{
-	a1=a;
-	b1=b;
-	h1=h;
-	C1=C1_in;
-	C2=C2_in;
-	};
-virtual double area()// определяем функцию вычисления площади для трапеции
-	{
-	return ((a1+b1)/2)*h1;
-	}
-virtual float perimeter()// определяем функцию вычисления периметра для круга
-	{
-		return a1+b1+C1+C2;
-	}
-private:
-	float a1; // приватные переменные, хранят параметры трапеции
-	float b1;
-	float h1;
-	float C1;
-	float C2;
-};
 
 void main()
 {
